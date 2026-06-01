@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>ArabiKu — Belajar Bahasa Arab</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg: #0f0e17;
+    --bg2: #1a1826;
+    --bg3: #252336;
+    --card: #1e1c2e;
+    --card2: #272540;
+    --accent: #f5a623;
+    --accent2: #e8630a;
+    --green: #2ecc71;
+    --red: #e74c3c;
+    --blue: #4facfe;
+    --purple: #a78bfa;
+    --text: #f0eff8;
+    --text2: #9e9cb8;
+    --border: rgba(255,255,255,0.07);
+    --radius: 16px;
+    --glow: 0 0 30px rgba(245,166,35,0.15);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Plus Jakarta Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,#1a1826 0%,#0f0e17 100%);
+    border-bottom:1px solid var(--border);
+    padding:0 24px;
+    position:sticky;top:0;z-index:100;
+    backdrop-filter:blur(20px);
+  }
+  .header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;gap:20px;height:64px}
+  .logo{font-family:'Amiri',serif;font-size:1.6rem;color:var(--accent);font-weight:700;letter-spacing:0.5px;flex-shrink:0}
+  .logo span{color:var(--text);font-size:0.9rem;font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;margin-left:6px}
+
+  /* NAV TABS */
+  nav{display:flex;gap:2px;flex:1;overflow-x:auto;scrollbar-width:none}
+  nav::-webkit-scrollbar{display:none}
+  .nav-btn{
+    background:none;border:none;color:var(--text2);font-family:inherit;font-size:0.8rem;font-weight:600;
+    padding:8px 14px;border-radius:10px;cursor:pointer;transition:all .2s;white-space:nowrap;
+    display:flex;align-items:center;gap:6px;
+  }
+  .nav-btn:hover{color:var(--text);background:var(--bg3)}
+  .nav-btn.active{color:var(--accent);background:rgba(245,166,35,0.12)}
+  .nav-btn .icon{font-size:1rem}
+
+  /* MAIN */
+  main{max-width:1100px;margin:0 auto;padding:24px 16px}
+
+  /* PANELS */
+  .panel{display:none;animation:fadeUp .3s ease}
+  .panel.active{display:block}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+  /* HERO */
+  .hero{
+    background:linear-gradient(135deg,#1e1c2e 0%,#252336 100%);
+    border:1px solid var(--border);border-radius:24px;
+    padding:48px 40px;text-align:center;margin-bottom:28px;
+    position:relative;overflow:hidden;
+  }
+  .hero::before{
+    content:'';position:absolute;top:-40px;right:-40px;
+    width:200px;height:200px;
+    background:radial-gradient(circle,rgba(245,166,35,0.15) 0%,transparent 70%);
+  }
+  .hero-arabic{font-family:'Amiri',serif;font-size:3rem;color:var(--accent);margin-bottom:12px;direction:rtl}
+  .hero h1{font-size:2rem;font-weight:800;margin-bottom:10px}
+  .hero h1 span{color:var(--accent)}
+  .hero p{color:var(--text2);font-size:1rem;margin-bottom:28px}
+  .hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+  .stat{text-align:center}
+  .stat-num{font-size:1.8rem;font-weight:800;color:var(--accent)}
+  .stat-label{font-size:0.75rem;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:1px}
+  .hero-btns{display:flex;gap:12px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#0f0e17;border:none;padding:12px 28px;border-radius:12px;
+    font-family:inherit;font-size:0.95rem;font-weight:700;cursor:pointer;
+    transition:all .2s;box-shadow:0 4px 20px rgba(245,166,35,0.3);
+  }
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,166,35,0.4)}
+  .btn-secondary{
+    background:var(--bg3);color:var(--text);border:1px solid var(--border);
+    padding:12px 28px;border-radius:12px;font-family:inherit;font-size:0.95rem;font-weight:600;
+    cursor:pointer;transition:all .2s;
+  }
+  .btn-secondary:hover{background:var(--card2);border-color:var(--accent)}
+
+  /* SECTION TITLE */
+  .section-title{
+    display:flex;align-items:center;gap:12px;margin-bottom:20px;
+  }
+  .section-title h2{font-size:1.3rem;font-weight:800}
+  .section-badge{
+    background:rgba(245,166,35,0.15);color:var(--accent);
+    font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+    padding:4px 10px;border-radius:20px;
+  }
+
+  /* CARDS GRID */
+  .cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+  .card{
+    background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+    padding:20px;cursor:pointer;transition:all .2s;
+  }
+  .card:hover{border-color:rgba(245,166,35,0.3);background:var(--card2);transform:translateY(-2px)}
+
+  /* FLASHCARD */
+  .flashcard-wrap{perspective:1000px;margin:0 auto;max-width:520px}
+  .flashcard{
+    width:100%;height:280px;position:relative;transform-style:preserve-3d;
+    transition:transform .6s cubic-bezier(.4,0,.2,1);cursor:pointer;
+    border-radius:20px;
+  }
+  .flashcard.flipped{transform:rotateY(180deg)}
+  .card-face{
+    position:absolute;inset:0;backface-visibility:hidden;
+    border-radius:20px;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;padding:32px;
+  }
+  .card-front{
+    background:linear-gradient(135deg,#252336,#1e1c2e);
+    border:1px solid rgba(245,166,35,0.2);
+  }
+  .card-back{
+    background:linear-gradient(135deg,#1c2e1e,#1e2e1c);
+    border:1px solid rgba(46,204,113,0.3);
+    transform:rotateY(180deg);
+  }
+  .card-arabic{font-family:'Amiri',serif;font-size:3.5rem;color:var(--accent);direction:rtl;margin-bottom:8px}
+  .card-latin{color:var(--text2);font-size:1rem;font-style:italic}
+  .card-meaning{font-size:1.6rem;font-weight:700;color:var(--green);margin-bottom:8px}
+  .card-example{color:var(--text2);font-size:0.85rem;text-align:center;font-style:italic}
+  .card-hint{color:var(--text2);font-size:0.8rem;margin-top:16px}
+
+  .fc-controls{display:flex;align-items:center;justify-content:center;gap:16px;margin-top:20px;flex-wrap:wrap}
+  .fc-counter{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:6px 16px;font-size:0.85rem;color:var(--text2);font-weight:600;
+  }
+  .btn-sm{
+    padding:8px 18px;border-radius:10px;border:none;font-family:inherit;
+    font-size:0.85rem;font-weight:600;cursor:pointer;transition:all .2s;
+  }
+  .btn-danger{background:rgba(231,76,60,0.15);color:var(--red);border:1px solid rgba(231,76,60,0.2)}
+  .btn-danger:hover{background:rgba(231,76,60,0.25)}
+  .btn-success{background:rgba(46,204,113,0.15);color:var(--green);border:1px solid rgba(46,204,113,0.2)}
+  .btn-success:hover{background:rgba(46,204,113,0.25)}
+  .btn-nav{background:var(--bg3);color:var(--text);border:1px solid var(--border)}
+  .btn-nav:hover{background:var(--card2)}
+  .fc-progress-bar{height:4px;background:var(--bg3);border-radius:2px;margin-bottom:20px;overflow:hidden}
+  .fc-progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:2px;transition:width .3s}
+
+  /* ANGKA */
+  .angka-hero{
+    background:linear-gradient(135deg,var(--card),var(--card2));
+    border:1px solid var(--border);border-radius:20px;padding:32px;
+    margin-bottom:24px;text-align:center;
+  }
+  .angka-display{
+    font-family:'Amiri',serif;font-size:5rem;color:var(--accent);
+    direction:rtl;margin-bottom:8px;line-height:1.1;
+  }
+  .angka-num{font-size:2.5rem;font-weight:800;margin-bottom:4px}
+  .angka-latin{color:var(--text2);font-size:1.1rem;font-style:italic}
+  .angka-controls{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+  .angka-input-row{display:flex;gap:10px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+  .angka-input{
+    background:var(--bg3);border:1px solid var(--border);color:var(--text);
+    font-family:inherit;font-size:1rem;padding:10px 16px;border-radius:10px;
+    width:140px;text-align:center;
+  }
+  .angka-input:focus{outline:none;border-color:var(--accent)}
+  .angka-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin-top:20px}
+  .angka-card{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    padding:14px;text-align:center;cursor:pointer;transition:all .2s;
+  }
+  .angka-card:hover{border-color:var(--accent);background:var(--card2)}
+  .angka-card .ar{font-family:'Amiri',serif;font-size:1.6rem;color:var(--accent);direction:rtl}
+  .angka-card .num{font-size:1rem;font-weight:700}
+  .angka-card .lat{font-size:0.75rem;color:var(--text2);font-style:italic}
+  .angka-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .angka-tab{
+    background:var(--bg3);border:1px solid var(--border);color:var(--text2);
+    padding:6px 14px;border-radius:20px;cursor:pointer;font-family:inherit;
+    font-size:0.8rem;font-weight:600;transition:all .2s;
+  }
+  .angka-tab.active{background:rgba(245,166,35,0.15);color:var(--accent);border-color:rgba(245,166,35,0.3)}
+
+  /* PERCAKAPAN */
+  .percakapan-grid{display:grid;gap:12px}
+  .percakapan-card{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:18px 20px;cursor:pointer;transition:all .2s;
+  }
+  .percakapan-card:hover{border-color:rgba(245,166,35,0.3);background:var(--card2)}
+  .percakapan-card .arab{font-family:'Amiri',serif;font-size:1.5rem;direction:rtl;color:var(--accent);margin-bottom:4px}
+  .percakapan-card .latin{color:var(--text2);font-style:italic;font-size:0.85rem;margin-bottom:2px}
+  .percakapan-card .indo{font-weight:600;font-size:0.95rem}
+  .perc-cat{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .perc-cat-btn{
+    background:var(--bg3);border:1px solid var(--border);color:var(--text2);
+    padding:6px 14px;border-radius:20px;cursor:pointer;font-family:inherit;
+    font-size:0.8rem;font-weight:600;transition:all .2s;
+  }
+  .perc-cat-btn.active{background:rgba(245,166,35,0.15);color:var(--accent);border-color:rgba(245,166,35,0.3)}
+
+  /* KAMUS AI */
+  .kamus-box{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:24px;margin-bottom:20px;
+  }
+  .kamus-input-row{display:flex;gap:10px}
+  .kamus-input{
+    flex:1;background:var(--bg3);border:1px solid var(--border);color:var(--text);
+    font-family:inherit;font-size:1rem;padding:12px 18px;border-radius:12px;
+  }
+  .kamus-input:focus{outline:none;border-color:var(--accent)}
+  .kamus-input::placeholder{color:var(--text2)}
+  .btn-search{
+    background:linear-gradient(135deg,var(--accent),var(--accent2));color:#0f0e17;
+    border:none;padding:12px 24px;border-radius:12px;font-family:inherit;
+    font-size:0.95rem;font-weight:700;cursor:pointer;transition:all .2s;white-space:nowrap;
+  }
+  .btn-search:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(245,166,35,0.3)}
+  .kamus-result{
+    background:var(--bg3);border:1px solid var(--border);border-radius:14px;
+    padding:20px;margin-top:16px;display:none;
+  }
+  .kamus-result.show{display:block;animation:fadeUp .3s ease}
+  .kamus-result .ar{font-family:'Amiri',serif;font-size:2.5rem;direction:rtl;color:var(--accent);margin-bottom:6px}
+  .kamus-result .latin{color:var(--text2);font-style:italic;margin-bottom:8px}
+  .kamus-result .arti{font-size:1.1rem;font-weight:700;margin-bottom:12px}
+  .kamus-result .contoh-label{font-size:0.75rem;color:var(--text2);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+  .kamus-result .contoh{
+    background:var(--card);border-left:3px solid var(--accent);
+    padding:10px 14px;border-radius:0 8px 8px 0;margin-bottom:6px;
+  }
+  .kamus-result .contoh .ar{font-size:1.3rem;margin-bottom:2px}
+  .kamus-result .contoh .id{color:var(--text2);font-size:0.85rem}
+  .kamus-loading{text-align:center;padding:24px;color:var(--text2)}
+  .kamus-loading .spinner{
+    width:32px;height:32px;border:3px solid var(--bg3);
+    border-top-color:var(--accent);border-radius:50%;
+    animation:spin .7s linear infinite;margin:0 auto 12px;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .kamus-suggestions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+  .kamus-chip{
+    background:var(--bg3);border:1px solid var(--border);color:var(--text2);
+    padding:5px 12px;border-radius:20px;cursor:pointer;font-size:0.8rem;font-weight:600;
+    transition:all .2s;
+  }
+  .kamus-chip:hover{border-color:var(--accent);color:var(--accent)}
+
+  /* HURUF */
+  .huruf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}
+  .huruf-card{
+    background:var(--card);border:1px solid var(--border);border-radius:14px;
+    padding:16px;text-align:center;cursor:pointer;transition:all .2s;
+  }
+  .huruf-card:hover{border-color:var(--purple);background:var(--card2)}
+  .huruf-card.active{border-color:var(--purple);background:rgba(167,139,250,0.1)}
+  .huruf-ar{font-family:'Amiri',serif;font-size:2.2rem;color:var(--purple);margin-bottom:4px}
+  .huruf-name{font-size:0.75rem;font-weight:700;color:var(--text2)}
+  .huruf-latin{font-size:0.7rem;color:var(--text2);font-style:italic}
+  .canvas-wrap{
+    background:var(--card);border:1px solid var(--border);border-radius:16px;
+    padding:20px;margin-top:16px;text-align:center;
+  }
+  #drawCanvas{
+    background:#0a0a14;border-radius:10px;border:2px solid var(--border);
+    cursor:crosshair;touch-action:none;
+  }
+  .canvas-controls{display:flex;gap:10px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+  .canvas-title{font-family:'Amiri',serif;font-size:2rem;color:var(--purple);margin-bottom:8px;direction:rtl}
+
+  /* GAMES */
+  .games-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:28px}
+  .game-card{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:24px;text-align:center;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;
+  }
+  .game-card:hover{transform:translateY(-4px);border-color:rgba(245,166,35,0.3);background:var(--card2)}
+  .game-emoji{font-size:3rem;margin-bottom:12px;display:block}
+  .game-title{font-size:1rem;font-weight:800;margin-bottom:6px}
+  .game-desc{font-size:0.8rem;color:var(--text2)}
+  .game-badge{
+    position:absolute;top:12px;right:12px;
+    background:var(--accent);color:#0f0e17;font-size:0.65rem;font-weight:800;
+    padding:3px 8px;border-radius:20px;text-transform:uppercase;
+  }
+  .game-area{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:28px;display:none;
+  }
+  .game-area.active{display:block;animation:fadeUp .3s ease}
+  .game-header{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+  .btn-back{
+    background:var(--bg3);border:1px solid var(--border);color:var(--text);
+    padding:8px 16px;border-radius:10px;cursor:pointer;font-family:inherit;
+    font-size:0.85rem;font-weight:600;transition:all .2s;
+  }
+  .btn-back:hover{background:var(--card2)}
+
+  /* TEBAK ARTI GAME */
+  .game-question{
+    text-align:center;background:var(--bg3);border-radius:16px;padding:32px;
+    margin-bottom:20px;
+  }
+  .game-word-ar{font-family:'Amiri',serif;font-size:4rem;color:var(--accent);direction:rtl;margin-bottom:8px}
+  .game-word-lat{color:var(--text2);font-style:italic;font-size:1rem}
+  .game-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .game-option{
+    background:var(--bg3);border:2px solid var(--border);color:var(--text);
+    padding:14px;border-radius:12px;cursor:pointer;font-family:inherit;
+    font-size:0.95rem;font-weight:600;transition:all .2s;text-align:center;
+  }
+  .game-option:hover{border-color:var(--accent);background:rgba(245,166,35,0.05)}
+  .game-option.correct{border-color:var(--green);background:rgba(46,204,113,0.15);color:var(--green)}
+  .game-option.wrong{border-color:var(--red);background:rgba(231,76,60,0.1);color:var(--red)}
+  .game-score-bar{
+    display:flex;align-items:center;justify-content:space-between;
+    background:var(--bg3);border-radius:12px;padding:12px 16px;margin-bottom:20px;
+  }
+  .score-item{text-align:center}
+  .score-val{font-size:1.3rem;font-weight:800}
+  .score-label{font-size:0.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px}
+
+  /* SUSUN KATA GAME */
+  .kata-tiles{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:20px 0}
+  .kata-tile{
+    background:linear-gradient(135deg,var(--card2),var(--card));
+    border:1px solid var(--border);border-radius:10px;padding:10px 18px;
+    cursor:pointer;font-family:'Amiri',serif;font-size:1.4rem;color:var(--text);
+    direction:rtl;transition:all .2s;
+  }
+  .kata-tile:hover{border-color:var(--accent);transform:translateY(-2px)}
+  .kata-tile.selected{background:rgba(245,166,35,0.15);border-color:var(--accent);opacity:0.4}
+  .kata-answer{
+    min-height:56px;background:var(--bg3);border:2px dashed var(--border);
+    border-radius:12px;display:flex;gap:8px;align-items:center;justify-content:center;
+    flex-wrap:wrap;padding:8px;margin-bottom:16px;font-family:'Amiri',serif;
+    font-size:1.4rem;direction:rtl;
+  }
+  .kata-answer-tile{
+    background:rgba(245,166,35,0.15);border:1px solid var(--accent);
+    border-radius:8px;padding:8px 14px;cursor:pointer;
+  }
+  .kata-target{color:var(--text2);font-size:0.85rem;text-align:center;margin-bottom:12px;font-style:italic}
+
+  /* MEMORY GAME */
+  .memory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:480px;margin:0 auto}
+  .memory-card{
+    aspect-ratio:1;background:var(--bg3);border:1px solid var(--border);
+    border-radius:10px;cursor:pointer;transition:all .3s;position:relative;
+    transform-style:preserve-3d;font-size:1.4rem;display:flex;
+    align-items:center;justify-content:center;font-family:'Amiri',serif;
+  }
+  .memory-card.flipped,.memory-card.matched{transform:rotateY(180deg)}
+  .memory-card-inner{
+    position:absolute;inset:0;backface-visibility:hidden;
+    display:flex;align-items:center;justify-content:center;border-radius:10px;
+  }
+  .memory-card-back{
+    background:linear-gradient(135deg,rgba(245,166,35,0.15),rgba(232,99,10,0.1));
+    border:1px solid rgba(245,166,35,0.3);transform:rotateY(180deg);
+    font-size:1.1rem;color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;
+    font-weight:700;padding:4px;text-align:center;
+  }
+  .memory-card-front{background:var(--card2);border:1px solid var(--border)}
+  .memory-card .q-mark{font-size:1.5rem;color:var(--text2);font-family:'Plus Jakarta Sans',sans-serif}
+  .memory-card.matched .memory-card-back{background:rgba(46,204,113,0.2);border-color:var(--green)}
+
+  /* KUIS */
+  .quiz-container{max-width:640px;margin:0 auto}
+  .quiz-progress{
+    display:flex;align-items:center;gap:12px;margin-bottom:24px;
+  }
+  .quiz-prog-bar{flex:1;height:6px;background:var(--bg3);border-radius:3px;overflow:hidden}
+  .quiz-prog-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px;transition:width .4s}
+  .quiz-prog-text{font-size:0.8rem;color:var(--text2);font-weight:600;white-space:nowrap}
+  .quiz-score-display{
+    display:flex;gap:16px;margin-bottom:20px;
+  }
+  .quiz-score-box{
+    background:var(--card);border:1px solid var(--border);border-radius:12px;
+    padding:10px 16px;text-align:center;flex:1;
+  }
+  .quiz-score-box .val{font-size:1.4rem;font-weight:800}
+  .quiz-score-box .lbl{font-size:0.7rem;color:var(--text2);text-transform:uppercase;letter-spacing:1px}
+  .quiz-card{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;padding:28px;
+  }
+  .quiz-type-tag{
+    display:inline-block;background:rgba(245,166,35,0.15);color:var(--accent);
+    font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+    padding:4px 10px;border-radius:20px;margin-bottom:16px;
+  }
+  .quiz-q{
+    font-family:'Amiri',serif;font-size:3rem;direction:rtl;color:var(--accent);
+    margin-bottom:8px;
+  }
+  .quiz-q-text{font-size:1.1rem;font-weight:600;margin-bottom:20px}
+  .quiz-choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  .quiz-choice{
+    background:var(--bg3);border:2px solid var(--border);color:var(--text);
+    padding:14px 18px;border-radius:12px;cursor:pointer;font-family:inherit;
+    font-size:0.95rem;font-weight:600;text-align:center;transition:all .2s;
+  }
+  .quiz-choice:hover{border-color:var(--accent);background:rgba(245,166,35,0.05)}
+  .quiz-choice.correct{border-color:var(--green)!important;background:rgba(46,204,113,0.15)!important;color:var(--green)!important}
+  .quiz-choice.wrong{border-color:var(--red)!important;background:rgba(231,76,60,0.1)!important;color:var(--red)!important}
+  .quiz-feedback{
+    margin-top:16px;padding:12px 16px;border-radius:10px;font-weight:600;
+    display:none;font-size:0.9rem;
+  }
+  .quiz-feedback.show{display:block}
+  .quiz-feedback.benar{background:rgba(46,204,113,0.12);color:var(--green);border:1px solid rgba(46,204,113,0.2)}
+  .quiz-feedback.salah{background:rgba(231,76,60,0.1);color:var(--red);border:1px solid rgba(231,76,60,0.2)}
+  .quiz-next-btn{
+    width:100%;margin-top:12px;padding:14px;background:linear-gradient(135deg,var(--accent),var(--accent2));
+    color:#0f0e17;border:none;border-radius:12px;font-family:inherit;font-size:1rem;
+    font-weight:700;cursor:pointer;display:none;transition:all .2s;
+  }
+  .quiz-next-btn.show{display:block}
+  .quiz-result{
+    background:var(--card);border:1px solid var(--border);border-radius:20px;
+    padding:40px;text-align:center;display:none;
+  }
+  .quiz-result.show{display:block;animation:fadeUp .4s ease}
+  .quiz-result-emoji{font-size:4rem;margin-bottom:16px}
+  .quiz-result-score{font-size:3rem;font-weight:800;color:var(--accent);margin-bottom:8px}
+  .quiz-result-msg{color:var(--text2);margin-bottom:24px}
+  .quiz-type-select{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+  .quiz-type-btn{
+    background:var(--bg3);border:1px solid var(--border);color:var(--text2);
+    padding:8px 16px;border-radius:10px;cursor:pointer;font-family:inherit;
+    font-size:0.8rem;font-weight:600;transition:all .2s;
+  }
+  .quiz-type-btn.active{background:rgba(245,166,35,0.15);color:var(--accent);border-color:rgba(245,166,35,0.3)}
+
+  /* UTILS */
+  .tag{
+    display:inline-block;background:rgba(79,172,254,0.12);color:var(--blue);
+    font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;
+    padding:3px 8px;border-radius:20px;margin-bottom:8px;
+  }
+  .divider{height:1px;background:var(--border);margin:24px 0}
+  .empty{color:var(--text2);text-align:center;padding:40px;font-size:0.9rem}
+
+  /* ANIMASI KARAKTER LUCU */
+  .mascot{font-size:3rem;display:inline-block;animation:bounce 2s infinite}
+  @keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+  .star-anim{display:inline-block;animation:star-spin 1s ease forwards}
+  @keyframes star-spin{0%{transform:scale(0) rotate(-180deg)}100%{transform:scale(1) rotate(0deg)}}
+  .confetti-burst{position:fixed;pointer-events:none;z-index:9999;top:0;left:0;width:100%;height:100%}
+  .confetti-piece{
+    position:absolute;width:8px;height:8px;border-radius:2px;
+    animation:confetti-fall 2s ease-in forwards;
+  }
+  @keyframes confetti-fall{
+    0%{transform:translateY(-20px) rotate(0deg);opacity:1}
+    100%{transform:translateY(100vh) rotate(720deg);opacity:0}
+  }
+
+  .emoji-float{animation:float 3s ease-in-out infinite}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-5deg)}50%{transform:translateY(-8px) rotate(5deg)}}
+
+  /* RESPONSIVE */
+  @media(max-width:600px){
+    .hero{padding:28px 20px}
+    .hero h1{font-size:1.5rem}
+    .hero-arabic{font-size:2rem}
+    .quiz-choices,.game-options{grid-template-columns:1fr}
+    .memory-grid{grid-template-columns:repeat(3,1fr)}
+    .games-grid{grid-template-columns:1fr 1fr}
+    .kamus-input-row{flex-direction:column}
+    .huruf-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo">🌙 ArabiKu <span>Belajar Arab Seru</span></div>
+    <nav id="mainNav">
+      <button class="nav-btn active" onclick="showPanel('home')" data-panel="home"><span class="icon">🏠</span>Beranda</button>
+      <button class="nav-btn" onclick="showPanel('flashcard')" data-panel="flashcard"><span class="icon">📚</span>Flashcard</button>
+      <button class="nav-btn" onclick="showPanel('angka')" data-panel="angka"><span class="icon">🔢</span>Angka</button>
+      <button class="nav-btn" onclick="showPanel('percakapan')" data-panel="percakapan"><span class="icon">💬</span>Percakapan</button>
+      <button class="nav-btn" onclick="showPanel('huruf')" data-panel="huruf"><span class="icon">✍️</span>Huruf</button>
+      <button class="nav-btn" onclick="showPanel('games')" data-panel="games"><span class="icon">🎮</span>Games</button>
+      <button class="nav-btn" onclick="showPanel('kamus')" data-panel="kamus"><span class="icon">🔍</span>Kamus AI</button>
+      <button class="nav-btn" onclick="showPanel('kuis')" data-panel="kuis"><span class="icon">🎯</span>Kuis</button>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+<!-- HOME -->
+<div class="panel active" id="panel-home">
+  <div class="hero">
+    <div class="hero-arabic">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</div>
+    <h1>Belajar Bahasa Arab<br>dengan <span>ArabiKu</span> ✨</h1>
+    <p>Kosakata, angka 1–1000+, kamus AI tak terbatas, games seru, dan latihan menulis — semua gratis!</p>
+    <div class="hero-btns">
+      <button class="btn-primary" onclick="showPanel('flashcard')">📚 Mulai Flashcard</button>
+      <button class="btn-secondary" onclick="showPanel('games')">🎮 Main Games</button>
+      <button class="btn-secondary" onclick="showPanel('kuis')">🎯 Mulai Kuis</button>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">100+</div><div class="stat-label">Kosakata</div></div>
+      <div class="stat"><div class="stat-num">1000+</div><div class="stat-label">Angka Arab</div></div>
+      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Games Seru</div></div>
+      <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Kamus AI</div></div>
+    </div>
+  </div>
+
+  <div class="section-title"><h2>🚀 Mulai Belajar dari Sini</h2></div>
+  <div class="cards-grid">
+    <div class="card" onclick="showPanel('flashcard')">
+      <div style="font-size:2.5rem;margin-bottom:10px" class="emoji-float">📚</div>
+      <div style="font-weight:800;font-size:1rem;margin-bottom:6px">Flashcard Interaktif</div>
+      <div style="color:var(--text2);font-size:0.85rem">80+ kosakata dengan suara & animasi flip</div>
+    </div>
+    <div class="card" onclick="showPanel('angka')">
+      <div style="font-size:2.5rem;margin-bottom:10px" class="emoji-float">🔢</div>
+      <div style="font-weight:800;font-size:1rem;margin-bottom:6px">Angka 1 – 1000+</div>
+      <div style="color:var(--text2);font-size:0.85rem">Pelajari angka Arab dengan contoh gabungan</div>
+    </div>
+    <div class="card" onclick="showPanel('huruf')">
+      <div style="font-size:2.5rem;margin-bottom:10px" class="emoji-float">✍️</div>
+      <div style="font-weight:800;font-size:1rem;margin-bottom:6px">Latihan Menulis Huruf</div>
+      <div style="color:var(--text2);font-size:0.85rem">28 huruf hijaiyah, latihan langsung di sini</div>
+    </div>
+    <div class="card" onclick="showPanel('games')">
+      <div style="font-size:2.5rem;margin-bottom:10px" class="emoji-float">🎮</div>
+      <div style="font-weight:800;font-size:1rem;margin-bottom:6px">Games Seru</div>
+      <div style="color:var(--text2);font-size:0.85rem">Tebak arti, susun kata, memory match & lainnya</div>
+    </div>
+    <div class="card" onclick="showPanel('kamus')">
+      <div style="font-size:2.5rem;margin-bottom:10px" class="emoji-float">🤖</div>
+      <div style="font-weight:800;font-size:1rem;margin-bottom:6px">Kamus AI Bebas</div>
+      <div style="color:var(--text2);font-size:0.85rem">Tanya apa aja! Dijawab oleh AI secara lengkap</div>
+    </div>
+    <div class="card" onclick="showPanel('kuis')">
+      <div style="font-size:2.5rem;margin-bottom:10px" class="emoji-float">🎯</div>
+      <div style="font-weight:800;font-size:1rem;margin-bottom:6px">Kuis Akhir</div>
+      <div style="color:var(--text2);font-size:0.85rem">Uji semua yang sudah dipelajari!</div>
+    </div>
+  </div>
+</div>
+
+<!-- FLASHCARD -->
+<div class="panel" id="panel-flashcard">
+  <div class="section-title"><h2>📚 Flashcard Interaktif</h2><span class="section-badge" id="fc-badge">0/80</span></div>
+  <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-prog" style="width:0%"></div></div>
+  <div class="flashcard-wrap" onclick="flipCard()">
+    <div class="flashcard" id="mainFlashcard">
+      <div class="card-face card-front">
+        <div class="card-arabic" id="fc-arabic">ا</div>
+        <div class="card-latin" id="fc-latin">alif</div>
+        <div class="card-hint">👆 Klik untuk lihat arti</div>
+      </div>
+      <div class="card-face card-back">
+        <div class="card-meaning" id="fc-meaning">Allah</div>
+        <div class="card-example" id="fc-example"></div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-controls">
+    <button class="btn-sm btn-nav" onclick="fcNav(-1)">← Prev</button>
+    <span class="fc-counter" id="fc-counter">1 / 80</span>
+    <button class="btn-sm btn-nav" onclick="fcNav(1)">Next →</button>
+  </div>
+  <div class="fc-controls" style="margin-top:12px">
+    <button class="btn-sm btn-danger" onclick="fcMark(false)">↩ Belum Hafal</button>
+    <span class="fc-counter"><span id="fc-hafal">0</span> hafal / <span id="fc-sisa">80</span> sisa</span>
+    <button class="btn-sm btn-success" onclick="fcMark(true)">✓ Sudah Hafal</button>
+  </div>
+  <div class="fc-controls" style="margin-top:8px">
+    <button class="btn-sm btn-nav" onclick="fcShuffle()">🔀 Acak</button>
+    <button class="btn-sm btn-nav" onclick="fcReset()">🔄 Reset</button>
+    <button class="btn-sm" style="background:rgba(79,172,254,0.12);color:var(--blue);border:1px solid rgba(79,172,254,0.2)" onclick="fcHafal()">⭐ Tampil Yg Belum</button>
+  </div>
+</div>
+
+<!-- ANGKA -->
+<div class="panel" id="panel-angka">
+  <div class="section-title"><h2>🔢 Angka Arab</h2><span class="section-badge">1 – 1000+</span></div>
+
+  <div class="angka-hero">
+    <div class="angka-display" id="angka-ar">١</div>
+    <div class="angka-num" id="angka-num">1</div>
+    <div class="angka-latin" id="angka-latin">wāḥid</div>
+    <div class="angka-controls">
+      <button class="btn-sm btn-nav" onclick="angkaPrev()">← Prev</button>
+      <button class="btn-sm" style="background:rgba(245,166,35,0.15);color:var(--accent);border:1px solid rgba(245,166,35,0.3)" onclick="angkaSpeakCurrent()">🔊 Dengar</button>
+      <button class="btn-sm btn-nav" onclick="angkaNext()">Next →</button>
+    </div>
+    <div class="angka-input-row">
+      <input class="angka-input" id="angkaInputNum" type="number" placeholder="Ketik angka..." min="0" max="9999" oninput="angkaFromInput(this.value)"/>
+      <button class="btn-primary" style="padding:10px 20px" onclick="angkaFromInput(document.getElementById('angkaInputNum').value)">Cari</button>
+    </div>
+  </div>
+
+  <div class="angka-tabs" id="angkaTabs">
+    <button class="angka-tab active" onclick="setAngkaRange(1,10,this)">1–10</button>
+    <button class="angka-tab" onclick="setAngkaRange(1,20,this)">1–20</button>
+    <button class="angka-tab" onclick="setAngkaRange(1,100,this)">1–100</button>
+    <button class="angka-tab" onclick="setAngkaRange(100,200,this)">100–200</button>
+    <button class="angka-tab" onclick="setAngkaRange(1,1000,this)">Ratusan Pilihan</button>
+    <button class="angka-tab" onclick="setAngkaRibuan(this)">1000–2000</button>
+  </div>
+  <div class="angka-grid" id="angkaGrid"></div>
+</div>
+
+<!-- PERCAKAPAN -->
+<div class="panel" id="panel-percakapan">
+  <div class="section-title"><h2>💬 Percakapan Sehari-hari</h2></div>
+  <div class="perc-cat" id="percCat">
+    <button class="perc-cat-btn active" onclick="filterPerc('all',this)">Semua</button>
+    <button class="perc-cat-btn" onclick="filterPerc('salam',this)">Salam</button>
+    <button class="perc-cat-btn" onclick="filterPerc('tanya',this)">Pertanyaan</button>
+    <button class="perc-cat-btn" onclick="filterPerc('doua',this)">Do'a</button>
+    <button class="perc-cat-btn" onclick="filterPerc('pasar',this)">Sehari-hari</button>
+  </div>
+  <div class="percakapan-grid" id="percGrid"></div>
+</div>
+
+<!-- HURUF -->
+<div class="panel" id="panel-huruf">
+  <div class="section-title"><h2>✍️ Latihan Huruf Hijaiyah</h2></div>
+  <div class="huruf-grid" id="hurufGrid"></div>
+  <div class="canvas-wrap" id="canvasWrap">
+    <div class="canvas-title" id="canvasTitle">ا</div>
+    <div style="color:var(--text2);font-size:0.85rem;margin-bottom:12px" id="canvasHint">Klik huruf di atas, lalu latih menulis di sini</div>
+    <canvas id="drawCanvas" width="400" height="220"></canvas>
+    <div class="canvas-controls">
+      <button class="btn-sm btn-nav" onclick="clearCanvas()">🗑️ Hapus</button>
+      <button class="btn-sm" style="background:rgba(167,139,250,0.15);color:var(--purple);border:1px solid rgba(167,139,250,0.2)" onclick="showGuide()">👁️ Lihat Panduan</button>
+      <select id="penSize" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:8px;font-family:inherit" onchange="updatePen()">
+        <option value="3">Tipis</option>
+        <option value="6" selected>Sedang</option>
+        <option value="10">Tebal</option>
+      </select>
+      <input type="color" id="penColor" value="#f5a623" style="width:40px;height:34px;border-radius:8px;border:none;cursor:pointer;background:none" onchange="updatePen()"/>
+    </div>
+  </div>
+</div>
+
+<!-- GAMES -->
+<div class="panel" id="panel-games">
+  <div class="section-title"><h2>🎮 Games Belajar Arab</h2><span class="section-badge">5 Games</span></div>
+  <div class="games-grid" id="gamesGrid">
+    <div class="game-card" onclick="startGame('tebak')">
+      <span class="game-emoji emoji-float">🎯</span>
+      <div class="game-title">Tebak Arti</div>
+      <div class="game-desc">Tebak arti kata Arab dari 4 pilihan. Cepat & seru!</div>
+      <span class="game-badge">Populer</span>
+    </div>
+    <div class="game-card" onclick="startGame('susun')">
+      <span class="game-emoji emoji-float">🔤</span>
+      <div class="game-title">Susun Kata</div>
+      <div class="game-desc">Susun huruf Arab jadi kata yang benar!</div>
+    </div>
+    <div class="game-card" onclick="startGame('memory')">
+      <span class="game-emoji emoji-float">🧩</span>
+      <div class="game-title">Memory Match</div>
+      <div class="game-desc">Pasangkan kata Arab dengan artinya!</div>
+      <span class="game-badge">Baru</span>
+    </div>
+    <div class="game-card" onclick="startGame('kilat')">
+      <span class="game-emoji emoji-float">⚡</span>
+      <div class="game-title">Kuis Kilat</div>
+      <div class="game-desc">Jawab 10 soal secepat mungkin, ada timer!</div>
+    </div>
+    <div class="game-card" onclick="startGame('angkagame')">
+      <span class="game-emoji emoji-float">🔢</span>
+      <div class="game-title">Tebak Angka</div>
+      <div class="game-desc">Lihat angka Arab, tebak nilainya! Level 1–3.</div>
+    </div>
+  </div>
+
+  <!-- TEBAK ARTI -->
+  <div class="game-area" id="game-tebak">
+    <div class="game-header">
+      <button class="btn-back" onclick="closeGame()">← Kembali</button>
+      <h3>🎯 Tebak Arti</h3>
+    </div>
+    <div class="game-score-bar">
+      <div class="score-item"><div class="score-val" id="tb-benar" style="color:var(--green)">0</div><div class="score-label">Benar</div></div>
+      <div class="score-item"><div class="score-val" id="tb-salah" style="color:var(--red)">0</div><div class="score-label">Salah</div></div>
+      <div class="score-item"><div class="score-val" id="tb-no">1</div><div class="score-label">Soal</div></div>
+    </div>
+    <div class="game-question">
+      <div class="game-word-ar" id="tb-word">كَلِمَة</div>
+      <div class="game-word-lat" id="tb-lat">kata</div>
+    </div>
+    <div class="game-options" id="tb-opts"></div>
+    <div class="quiz-feedback" id="tb-feedback"></div>
+    <button class="quiz-next-btn" id="tb-next" onclick="nextTebak()">Soal Berikutnya →</button>
+  </div>
+
+  <!-- SUSUN KATA -->
+  <div class="game-area" id="game-susun">
+    <div class="game-header">
+      <button class="btn-back" onclick="closeGame()">← Kembali</button>
+      <h3>🔤 Susun Kata</h3>
+    </div>
+    <div class="game-score-bar">
+      <div class="score-item"><div class="score-val" id="sk-benar" style="color:var(--green)">0</div><div class="score-label">Benar</div></div>
+      <div class="score-item"><div class="score-val" id="sk-soal">1</div><div class="score-label">Soal</div></div>
+    </div>
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="color:var(--text2);font-size:0.85rem;margin-bottom:6px">Terjemahan:</div>
+      <div style="font-size:1.2rem;font-weight:700" id="sk-meaning"></div>
+    </div>
+    <div class="kata-target" id="sk-hint"></div>
+    <div class="kata-answer" id="sk-answer">
+      <span style="color:var(--text2);font-size:0.85rem">Klik huruf di bawah</span>
+    </div>
+    <div class="kata-tiles" id="sk-tiles"></div>
+    <div class="quiz-feedback" id="sk-feedback"></div>
+    <div style="display:flex;gap:10px;margin-top:12px;justify-content:center">
+      <button class="btn-sm btn-nav" onclick="skClear()">🗑️ Reset</button>
+      <button class="btn-sm btn-success" onclick="skCheck()">✓ Cek Jawaban</button>
+      <button class="btn-sm btn-nav" onclick="nextSusun()">→ Skip</button>
+    </div>
+  </div>
+
+  <!-- MEMORY -->
+  <div class="game-area" id="game-memory">
+    <div class="game-header">
+      <button class="btn-back" onclick="closeGame()">← Kembali</button>
+      <h3>🧩 Memory Match</h3>
+    </div>
+    <div class="game-score-bar">
+      <div class="score-item"><div class="score-val" id="mm-pasang" style="color:var(--green)">0</div><div class="score-label">Pasang</div></div>
+      <div class="score-item"><div class="score-val" id="mm-percobaan">0</div><div class="score-label">Percobaan</div></div>
+    </div>
+    <div class="memory-grid" id="memoryGrid"></div>
+    <button class="btn-sm btn-nav" style="margin:16px auto;display:block" onclick="initMemory()">🔄 Ulang</button>
+  </div>
+
+  <!-- KILAT -->
+  <div class="game-area" id="game-kilat">
+    <div class="game-header">
+      <button class="btn-back" onclick="closeGame()">← Kembali</button>
+      <h3>⚡ Kuis Kilat</h3>
+    </div>
+    <div class="game-score-bar">
+      <div class="score-item"><div class="score-val" id="kl-timer" style="color:var(--accent)">10</div><div class="score-label">Detik</div></div>
+      <div class="score-item"><div class="score-val" id="kl-benar" style="color:var(--green)">0</div><div class="score-label">Benar</div></div>
+      <div class="score-item"><div class="score-val" id="kl-no">1</div><div class="score-label">Soal</div></div>
+    </div>
+    <div class="game-question">
+      <div class="game-word-ar" id="kl-word"></div>
+      <div class="game-word-lat" id="kl-lat"></div>
+    </div>
+    <div class="game-options" id="kl-opts"></div>
+    <div class="quiz-feedback" id="kl-feedback"></div>
+  </div>
+
+  <!-- ANGKA GAME -->
+  <div class="game-area" id="game-angkagame">
+    <div class="game-header">
+      <button class="btn-back" onclick="closeGame()">← Kembali</button>
+      <h3>🔢 Tebak Angka Arab</h3>
+    </div>
+    <div class="game-score-bar">
+      <div class="score-item"><div class="score-val" id="ag-benar" style="color:var(--green)">0</div><div class="score-label">Benar</div></div>
+      <div class="score-item"><div class="score-val" id="ag-no">1</div><div class="score-label">Soal</div></div>
+    </div>
+    <div class="game-question">
+      <div class="game-word-ar" id="ag-ar" style="font-size:4rem">٥</div>
+    </div>
+    <div class="game-options" id="ag-opts"></div>
+    <div class="quiz-feedback" id="ag-feedback"></div>
+    <button class="quiz-next-btn" id="ag-next" onclick="nextAngkaGame()">Soal Berikutnya →</button>
+  </div>
+</div>
+
+<!-- KAMUS AI -->
+<div class="panel" id="panel-kamus">
+  <div class="section-title"><h2>🤖 Kamus AI — Tanya Apa Aja!</h2><span class="section-badge">Powered by AI</span></div>
+  <div class="kamus-box">
+    <div style="color:var(--text2);font-size:0.85rem;margin-bottom:12px">
+      💡 Tanya dalam bahasa apapun! Contoh: "apa arti رحمة?", "bagaimana cara menulis 'terima kasih' dalam Arab?", "apa beda فَعَلَ dan يَفْعَلُ?"
+    </div>
+    <div class="kamus-input-row">
+      <input class="kamus-input" id="kamusInput" placeholder="Ketik kata Arab, Indonesia, atau pertanyaan apa aja..." onkeydown="if(event.key==='Enter')kamusSearch()"/>
+      <button class="btn-search" onclick="kamusSearch()">🔍 Cari</button>
+    </div>
+    <div class="kamus-suggestions">
+      <span style="font-size:0.75rem;color:var(--text2);padding:5px 0">Coba:</span>
+      <span class="kamus-chip" onclick="kamusAuto('apa arti بَيْت')">بَيْت</span>
+      <span class="kamus-chip" onclick="kamusAuto('cara menulis terima kasih dalam arab')">terima kasih</span>
+      <span class="kamus-chip" onclick="kamusAuto('apa itu isim fail')">isim fa'il</span>
+      <span class="kamus-chip" onclick="kamusAuto('beda أنت dan أنتِ')">أنت vs أنتِ</span>
+      <span class="kamus-chip" onclick="kamusAuto('angka 100 dalam bahasa arab')">angka 100</span>
+      <span class="kamus-chip" onclick="kamusAuto('apa arti subhanallah')">subhanallah</span>
+    </div>
+    <div class="kamus-result" id="kamusResult">
+      <div class="kamus-loading" id="kamusLoading" style="display:none">
+        <div class="spinner"></div>
+        <div>AI sedang mencari jawaban...</div>
+      </div>
+      <div id="kamusContent"></div>
+    </div>
+  </div>
+</div>
+
+<!-- KUIS (di akhir) -->
+<div class="panel" id="panel-kuis">
+  <div class="section-title"><h2>🎯 Kuis Bahasa Arab</h2><span class="section-badge">Uji Kemampuan</span></div>
+  <div class="quiz-container">
+    <div id="quiz-setup">
+      <div style="background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;margin-bottom:20px;text-align:center">
+        <div style="font-size:3rem;margin-bottom:12px" class="mascot">🦁</div>
+        <div style="font-size:1.1rem;font-weight:700;margin-bottom:6px">Siap Uji Kemampuanmu?</div>
+        <div style="color:var(--text2);font-size:0.85rem;margin-bottom:20px">Kerjakan kuis ini setelah belajar flashcard, angka, dan percakapan!</div>
+        <div class="quiz-type-select" style="justify-content:center">
+          <button class="quiz-type-btn active" onclick="setQuizType('arab-indo',this)">🇸🇦 Arab → Indo</button>
+          <button class="quiz-type-btn" onclick="setQuizType('indo-arab',this)">🇮🇩 Indo → Arab</button>
+          <button class="quiz-type-btn" onclick="setQuizType('campuran',this)">🎲 Campuran</button>
+        </div>
+        <div style="margin-top:8px;margin-bottom:16px">
+          <label style="color:var(--text2);font-size:0.85rem">Jumlah soal:</label>
+          <select id="quizCount" style="background:var(--bg3);border:1px solid var(--border);color:var(--text);padding:6px 12px;border-radius:8px;margin-left:8px;font-family:inherit">
+            <option value="10">10 soal</option>
+            <option value="20" selected>20 soal</option>
+            <option value="30">30 soal</option>
+          </select>
+        </div>
+        <button class="btn-primary" style="padding:14px 32px;font-size:1rem" onclick="startQuiz()">🚀 Mulai Kuis!</button>
+      </div>
+    </div>
+    <div id="quiz-game" style="display:none">
+      <div class="quiz-progress">
+        <div class="quiz-prog-bar"><div class="quiz-prog-fill" id="quiz-prog-fill"></div></div>
+        <div class="quiz-prog-text" id="quiz-prog-text">1/20</div>
+      </div>
+      <div class="quiz-score-display">
+        <div class="quiz-score-box"><div class="val" id="q-benar" style="color:var(--green)">0</div><div class="lbl">Benar</div></div>
+        <div class="quiz-score-box"><div class="val" id="q-salah" style="color:var(--red)">0</div><div class="lbl">Salah</div></div>
+        <div class="quiz-score-box"><div class="val" id="q-sisa">20</div><div class="lbl">Sisa</div></div>
+      </div>
+      <div class="quiz-card">
+        <div class="quiz-type-tag" id="quiz-type-tag">Arab → Indonesia</div>
+        <div class="quiz-q" id="quiz-q"></div>
+        <div class="quiz-q-text" id="quiz-q-text"></div>
+        <div class="quiz-choices" id="quiz-choices"></div>
+        <div class="quiz-feedback" id="quiz-feedback"></div>
+        <button class="quiz-next-btn" id="quiz-next-btn" onclick="quizNext()">Soal Berikutnya →</button>
+      </div>
+    </div>
+    <div class="quiz-result" id="quiz-result">
+      <div class="quiz-result-emoji" id="result-emoji">🏆</div>
+      <div class="quiz-result-score" id="result-score">0/20</div>
+      <div style="font-size:1.2rem;font-weight:700;margin-bottom:8px" id="result-grade"></div>
+      <div class="quiz-result-msg" id="result-msg"></div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="btn-primary" onclick="startQuiz()">🔄 Ulangi Kuis</button>
+        <button class="btn-secondary" onclick="showPanel('flashcard')">📚 Belajar Lagi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+</main>
+
+<script>
+// ===== DATA =====
+const vocab = [
+  {ar:'أَبٌ',lat:'abun',id:'Ayah',cat:'keluarga',ex:'أَبِي طَيِّبٌ - Ayahku baik'},
+  {ar:'أُمٌّ',lat:'ummun',id:'Ibu',cat:'keluarga',ex:'أُمِّي جَمِيلَةٌ - Ibuku cantik'},
+  {ar:'أَخٌ',lat:'akhun',id:'Kakak/Adik laki-laki',cat:'keluarga',ex:'أَخِي طَالِبٌ - Saudaraku pelajar'},
+  {ar:'أُخْتٌ',lat:'ukhtun',id:'Kakak/Adik perempuan',cat:'keluarga',ex:''},
+  {ar:'بَيْتٌ',lat:'baitun',id:'Rumah',cat:'tempat',ex:'بَيْتِي كَبِيرٌ - Rumahku besar'},
+  {ar:'مَدْرَسَةٌ',lat:'madrasatun',id:'Sekolah',cat:'tempat',ex:''},
+  {ar:'مَسْجِدٌ',lat:'masjidun',id:'Masjid',cat:'tempat',ex:''},
+  {ar:'كِتَابٌ',lat:'kitābun',id:'Buku',cat:'benda',ex:'هَذَا كِتَابٌ - Ini buku'},
+  {ar:'قَلَمٌ',lat:'qalamun',id:'Pena/Pensil',cat:'benda',ex:''},
+  {ar:'مَاءٌ',lat:'māʾun',id:'Air',cat:'benda',ex:''},
+  {ar:'طَعَامٌ',lat:'ṭaʿāmun',id:'Makanan',cat:'benda',ex:''},
+  {ar:'رَجُلٌ',lat:'rajulun',id:'Pria/Laki-laki',cat:'orang',ex:''},
+  {ar:'اِمْرَأَةٌ',lat:'imraʾatun',id:'Wanita/Perempuan',cat:'orang',ex:''},
+  {ar:'وَلَدٌ',lat:'waladun',id:'Anak laki-laki',cat:'orang',ex:''},
+  {ar:'بِنْتٌ',lat:'bintun',id:'Anak perempuan/Putri',cat:'orang',ex:''},
+  {ar:'كَبِيرٌ',lat:'kabīrun',id:'Besar',cat:'sifat',ex:''},
+  {ar:'صَغِيرٌ',lat:'ṣaġīrun',id:'Kecil',cat:'sifat',ex:''},
+  {ar:'جَمِيلٌ',lat:'jamīlun',id:'Cantik/Indah',cat:'sifat',ex:''},
+  {ar:'طَيِّبٌ',lat:'ṭayyibun',id:'Baik/Bagus',cat:'sifat',ex:''},
+  {ar:'جَدِيدٌ',lat:'jadīdun',id:'Baru',cat:'sifat',ex:''},
+  {ar:'قَدِيمٌ',lat:'qadīmun',id:'Lama/Kuno',cat:'sifat',ex:''},
+  {ar:'أَكَلَ',lat:'akala',id:'Makan (dia lk)',cat:'kerja',ex:'هُوَ أَكَلَ - Dia makan'},
+  {ar:'شَرِبَ',lat:'shariba',id:'Minum (dia lk)',cat:'kerja',ex:''},
+  {ar:'ذَهَبَ',lat:'dhahaba',id:'Pergi (dia lk)',cat:'kerja',ex:''},
+  {ar:'جَاءَ',lat:'jāʾa',id:'Datang (dia lk)',cat:'kerja',ex:''},
+  {ar:'قَرَأَ',lat:'qaraʾa',id:'Membaca (dia lk)',cat:'kerja',ex:''},
+  {ar:'كَتَبَ',lat:'kataba',id:'Menulis (dia lk)',cat:'kerja',ex:''},
+  {ar:'جَلَسَ',lat:'jalasa',id:'Duduk (dia lk)',cat:'kerja',ex:''},
+  {ar:'نَامَ',lat:'nāma',id:'Tidur (dia lk)',cat:'kerja',ex:''},
+  {ar:'هُوَ',lat:'huwa',id:'Dia (lk)',cat:'dhamir',ex:''},
+  {ar:'هِيَ',lat:'hiya',id:'Dia (pr)',cat:'dhamir',ex:''},
+  {ar:'أَنَا',lat:'ana',id:'Saya',cat:'dhamir',ex:'أَنَا طَالِبٌ - Saya pelajar'},
+  {ar:'أَنْتَ',lat:'anta',id:'Kamu (lk)',cat:'dhamir',ex:''},
+  {ar:'أَنْتِ',lat:'anti',id:'Kamu (pr)',cat:'dhamir',ex:''},
+  {ar:'نَحْنُ',lat:'naḥnu',id:'Kami/Kita',cat:'dhamir',ex:''},
+  {ar:'شَمْسٌ',lat:'shamsun',id:'Matahari',cat:'alam',ex:''},
+  {ar:'قَمَرٌ',lat:'qamarun',id:'Bulan',cat:'alam',ex:''},
+  {ar:'نَجْمٌ',lat:'najmun',id:'Bintang',cat:'alam',ex:''},
+  {ar:'سَمَاءٌ',lat:'samāʾun',id:'Langit',cat:'alam',ex:''},
+  {ar:'بَحْرٌ',lat:'baḥrun',id:'Laut',cat:'alam',ex:''},
+  {ar:'يَوْمٌ',lat:'yawmun',id:'Hari',cat:'waktu',ex:''},
+  {ar:'لَيْلٌ',lat:'lailun',id:'Malam',cat:'waktu',ex:''},
+  {ar:'صَبَاحٌ',lat:'ṣabāḥun',id:'Pagi',cat:'waktu',ex:''},
+  {ar:'مَسَاءٌ',lat:'masāʾun',id:'Sore/Petang',cat:'waktu',ex:''},
+  {ar:'أُسْبُوعٌ',lat:'usbūʿun',id:'Minggu',cat:'waktu',ex:''},
+  {ar:'شَهْرٌ',lat:'shahrun',id:'Bulan (kalender)',cat:'waktu',ex:''},
+  {ar:'سَنَةٌ',lat:'sanatun',id:'Tahun',cat:'waktu',ex:''},
+  {ar:'مَرِيضٌ',lat:'marīḍun',id:'Sakit',cat:'sifat',ex:''},
+  {ar:'سَعِيدٌ',lat:'saʿīdun',id:'Senang/Bahagia',cat:'sifat',ex:''},
+  {ar:'حَزِينٌ',lat:'ḥazīnun',id:'Sedih',cat:'sifat',ex:''},
+  {ar:'مُتْعِبٌ',lat:'mutʿibun',id:'Lelah',cat:'sifat',ex:''},
+  {ar:'لَوْنٌ',lat:'lawnun',id:'Warna',cat:'benda',ex:''},
+  {ar:'أَحْمَرُ',lat:'aḥmaru',id:'Merah',cat:'warna',ex:''},
+  {ar:'أَزْرَقُ',lat:'azraqu',id:'Biru',cat:'warna',ex:''},
+  {ar:'أَخْضَرُ',lat:'akhḍaru',id:'Hijau',cat:'warna',ex:''},
+  {ar:'أَصْفَرُ',lat:'aṣfaru',id:'Kuning',cat:'warna',ex:''},
+  {ar:'أَبْيَضُ',lat:'abyaḍu',id:'Putih',cat:'warna',ex:''},
+  {ar:'أَسْوَدُ',lat:'aswadu',id:'Hitam',cat:'warna',ex:''},
+  {ar:'كَلْبٌ',lat:'kalbun',id:'Anjing',cat:'hewan',ex:''},
+  {ar:'قِطٌّ',lat:'qiṭṭun',id:'Kucing',cat:'hewan',ex:''},
+  {ar:'طَيْرٌ',lat:'ṭairun',id:'Burung',cat:'hewan',ex:''},
+  {ar:'سَمَكٌ',lat:'samakun',id:'Ikan',cat:'hewan',ex:''},
+  {ar:'رَأْسٌ',lat:'raʾsun',id:'Kepala',cat:'tubuh',ex:''},
+  {ar:'عَيْنٌ',lat:'ʿainun',id:'Mata',cat:'tubuh',ex:''},
+  {ar:'أُذُنٌ',lat:'udhunun',id:'Telinga',cat:'tubuh',ex:''},
+  {ar:'يَدٌ',lat:'yadun',id:'Tangan',cat:'tubuh',ex:''},
+  {ar:'قَدَمٌ',lat:'qadamun',id:'Kaki',cat:'tubuh',ex:''},
+  {ar:'قَلْبٌ',lat:'qalbun',id:'Hati/Jantung',cat:'tubuh',ex:''},
+  {ar:'رَحْمَةٌ',lat:'raḥmatun',id:'Kasih Sayang/Rahmat',cat:'agama',ex:''},
+  {ar:'صَلَاةٌ',lat:'ṣalātun',id:'Shalat/Doa',cat:'agama',ex:''},
+  {ar:'صِيَامٌ',lat:'ṣiyāmun',id:'Puasa',cat:'agama',ex:''},
+  {ar:'زَكَاةٌ',lat:'zakātun',id:'Zakat',cat:'agama',ex:''},
+  {ar:'حَجٌّ',lat:'ḥajjun',id:'Haji',cat:'agama',ex:''},
+  {ar:'جَنَّةٌ',lat:'jannatun',id:'Surga',cat:'agama',ex:''},
+  {ar:'نَارٌ',lat:'nārun',id:'Api/Neraka',cat:'agama',ex:''},
+  {ar:'عِلْمٌ',lat:'ʿilmun',id:'Ilmu',cat:'agama',ex:''},
+  {ar:'حَلَالٌ',lat:'ḥalālun',id:'Halal',cat:'agama',ex:''},
+  {ar:'حَرَامٌ',lat:'ḥarāmun',id:'Haram',cat:'agama',ex:''},
+];
+
+// Angka Arab
+function toArabicDigit(n){
+  const d=['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
+  return String(n).split('').map(c=>d[+c]||c).join('');
+}
+const angkaData=[];
+const angkaBase=[
+  [0,'صِفْرٌ','ṣifrun'],[1,'وَاحِدٌ','wāḥidun'],[2,'اِثْنَانِ','ithnanī'],[3,'ثَلَاثَةٌ','thalāthatun'],
+  [4,'أَرْبَعَةٌ','arbaʿatun'],[5,'خَمْسَةٌ','khamsatun'],[6,'سِتَّةٌ','sittatun'],
+  [7,'سَبْعَةٌ','sabʿatun'],[8,'ثَمَانِيَةٌ','thamāniyatun'],[9,'تِسْعَةٌ','tisʿatun'],
+  [10,'عَشَرَةٌ','ʿasharatun'],[11,'أَحَدَ عَشَرَ','aḥada ʿashar'],[12,'اِثْنَا عَشَرَ','ithnā ʿashar'],
+  [13,'ثَلَاثَةَ عَشَرَ','thalāthata ʿashar'],[14,'أَرْبَعَةَ عَشَرَ','arbaʿata ʿashar'],
+  [15,'خَمْسَةَ عَشَرَ','khamsata ʿashar'],[16,'سِتَّةَ عَشَرَ','sittata ʿashar'],
+  [17,'سَبْعَةَ عَشَرَ','sabʿata ʿashar'],[18,'ثَمَانِيَةَ عَشَرَ','thamāniyata ʿashar'],
+  [19,'تِسْعَةَ عَشَرَ','tisʿata ʿashar'],[20,'عِشْرُونَ','ʿishrūna'],
+  [21,'وَاحِدٌ وَعِشْرُونَ','wāḥidun wa-ʿishrūna'],[22,'اِثْنَانِ وَعِشْرُونَ','ithnanī wa-ʿishrūna'],
+  [23,'ثَلَاثَةٌ وَعِشْرُونَ','thalāthatun wa-ʿishrūna'],[24,'أَرْبَعَةٌ وَعِشْرُونَ','arbaʿatun wa-ʿishrūna'],
+  [25,'خَمْسَةٌ وَعِشْرُونَ','khamsatun wa-ʿishrūna'],[30,'ثَلَاثُونَ','thalāthūna'],
+  [40,'أَرْبَعُونَ','arbaʿūna'],[50,'خَمْسُونَ','khamsūna'],[60,'سِتُّونَ','sittūna'],
+  [70,'سَبْعُونَ','sabʿūna'],[80,'ثَمَانُونَ','thamānūna'],[90,'تِسْعُونَ','tisʿūna'],
+  [100,'مِائَةٌ','miʾatun'],[101,'مِائَةٌ وَوَاحِدٌ','miʾatun wa-wāḥidun'],
+  [110,'مِائَةٌ وَعَشَرَةٌ','miʾatun wa-ʿasharatun'],[150,'مِائَةٌ وَخَمْسُونَ','miʾatun wa-khamsūna'],
+  [200,'مِئَتَانِ','miʾatāni'],[300,'ثَلَاثُمِائَةٍ','thalāthumiʾatin'],
+  [400,'أَرْبَعُمِائَةٍ','arbaʿumiʾatin'],[500,'خَمْسُمِائَةٍ','khamsumiʾatin'],
+  [600,'سِتُّمِائَةٍ','sittumiʾatin'],[700,'سَبْعُمِائَةٍ','sabʿumiʾatin'],
+  [800,'ثَمَانُمِائَةٍ','thamānumiʾatin'],[900,'تِسْعُمِائَةٍ','tisʿumiʾatin'],
+  [1000,'أَلْفٌ','alfun'],[1001,'أَلْفٌ وَوَاحِدٌ','alfun wa-wāḥidun'],
+  [1100,'أَلْفٌ وَمِائَةٌ','alfun wa-miʾatun'],[1500,'أَلْفٌ وَخَمْسُمِائَةٍ','alfun wa-khamsumiʾatin'],
+  [2000,'أَلْفَانِ','alfāni'],[3000,'ثَلَاثَةُ آلَافٍ','thalāthatu ālāfin'],
+  [5000,'خَمْسَةُ آلَافٍ','khamsatu ālāfin'],[10000,'عَشَرَةُ آلَافٍ','ʿasharu ālāfin'],
+];
+angkaBase.forEach(([n,ar,lat])=>angkaData.push({n,ar,lat}));
+
+let currentAngka=0;
+let angkaShowList=[...angkaData.slice(0,10)];
+
+function getAngkaObj(n){return angkaData.find(a=>a.n===n)}
+function displayAngka(obj){
+  if(!obj)return;
+  document.getElementById('angka-ar').textContent=toArabicDigit(obj.n)+' — '+obj.ar;
+  document.getElementById('angka-num').textContent=obj.n.toLocaleString();
+  document.getElementById('angka-latin').textContent=obj.lat;
+}
+function angkaPrev(){if(currentAngka>0){currentAngka--;displayAngka(angkaShowList[currentAngka]);}}
+function angkaNext(){if(currentAngka<angkaShowList.length-1){currentAngka++;displayAngka(angkaShowList[currentAngka]);}}
+function angkaSpeakCurrent(){speak(angkaShowList[currentAngka]?.ar||'')}
+function angkaFromInput(v){
+  if(!v&&v!==0)return;
+  const n=parseInt(v);
+  const obj=getAngkaObj(n);
+  if(obj){displayAngka(obj);}
+  else{
+    // Generate approximation
+    document.getElementById('angka-ar').textContent=toArabicDigit(n);
+    document.getElementById('angka-num').textContent=n.toLocaleString();
+    document.getElementById('angka-latin').textContent='(lihat tabel referensi)';
+  }
+}
+function setAngkaRange(from,to,btn){
+  document.querySelectorAll('.angka-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  angkaShowList=angkaData.filter(a=>a.n>=from&&a.n<=to);
+  currentAngka=0;
+  if(angkaShowList.length)displayAngka(angkaShowList[0]);
+  renderAngkaGrid(angkaShowList);
+}
+function setAngkaRibuan(btn){
+  document.querySelectorAll('.angka-tab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  angkaShowList=angkaData.filter(a=>a.n>=1000);
+  currentAngka=0;
+  if(angkaShowList.length)displayAngka(angkaShowList[0]);
+  renderAngkaGrid(angkaShowList);
+}
+function renderAngkaGrid(list){
+  const g=document.getElementById('angkaGrid');
+  g.innerHTML=list.map(a=>`
+    <div class="angka-card" onclick="displayAngka(${JSON.stringify(a).replace(/"/g,'&quot;')});currentAngka=${angkaShowList.indexOf(a)}">
+      <div class="ar">${toArabicDigit(a.n)}</div>
+      <div class="num">${a.n.toLocaleString()}</div>
+      <div class="lat">${a.lat}</div>
+    </div>
+  `).join('');
+}
+
+// ===== PERCAKAPAN =====
+const percData=[
+  {ar:'السَّلَامُ عَلَيْكُمْ',lat:'as-salāmu ʿalaikum',id:'Semoga keselamatan atasmu',cat:'salam'},
+  {ar:'وَعَلَيْكُمُ السَّلَامُ',lat:'wa-ʿalaikumu s-salām',id:'Dan atasmu keselamatan',cat:'salam'},
+  {ar:'كَيْفَ حَالُكَ؟',lat:'kaifa ḥāluka?',id:'Bagaimana kabarmu? (lk)',cat:'tanya'},
+  {ar:'كَيْفَ حَالُكِ؟',lat:'kaifa ḥāluki?',id:'Bagaimana kabarmu? (pr)',cat:'tanya'},
+  {ar:'بِخَيْرٍ، شُكْرًا',lat:'bi-khair, shukran',id:'Baik, terima kasih',cat:'salam'},
+  {ar:'شُكْرًا جَزِيلًا',lat:'shukran jazīlan',id:'Terima kasih banyak',cat:'salam'},
+  {ar:'عَفْوًا',lat:'ʿafwan',id:'Sama-sama / Maaf',cat:'salam'},
+  {ar:'مَا اسْمُكَ؟',lat:'ma smuka?',id:'Siapa namamu? (lk)',cat:'tanya'},
+  {ar:'اِسْمِي...',lat:'ismī...',id:'Namaku...',cat:'tanya'},
+  {ar:'مِنْ أَيْنَ أَنْتَ؟',lat:'min aina anta?',id:'Dari mana kamu? (lk)',cat:'tanya'},
+  {ar:'أَنَا مِنْ إِنْدُونِيسِيَا',lat:'ana min Indonīsiyā',id:'Saya dari Indonesia',cat:'tanya'},
+  {ar:'بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ',lat:'bismillāhi r-raḥmāni r-raḥīm',id:'Dengan nama Allah Yang Maha Pengasih',cat:'doua'},
+  {ar:'الْحَمْدُ لِلَّهِ',lat:'alḥamdu lillāh',id:'Segala puji bagi Allah',cat:'doua'},
+  {ar:'سُبْحَانَ اللَّهِ',lat:'subḥānallāh',id:'Maha Suci Allah',cat:'doua'},
+  {ar:'اللَّهُ أَكْبَرُ',lat:'Allāhu akbar',id:'Allah Maha Besar',cat:'doua'},
+  {ar:'إِنْ شَاءَ اللَّهُ',lat:'in shāʾa llāh',id:'Insya Allah / Jika Allah menghendaki',cat:'doua'},
+  {ar:'مَاشَاءَاللَّهُ',lat:'māshāʾallāh',id:'Sungguh luar biasa (kuasa Allah)',cat:'doua'},
+  {ar:'أَسْتَغْفِرُ اللَّهَ',lat:'astaġfirullāh',id:'Aku mohon ampun kepada Allah',cat:'doua'},
+  {ar:'كَمِ الثَّمَنُ؟',lat:'kami th-thamanu?',id:'Berapa harganya?',cat:'pasar'},
+  {ar:'هَلْ عِنْدَكَ...؟',lat:'hal ʿindaka...?',id:'Apakah kamu punya...?',cat:'pasar'},
+  {ar:'أُرِيدُ هَذَا',lat:'urīdu hādhā',id:'Saya mau ini',cat:'pasar'},
+  {ar:'غَالٍ جِدًّا',lat:'ġālin jiddan',id:'Terlalu mahal',cat:'pasar'},
+  {ar:'أَيْنَ الْمَسْجِدُ؟',lat:'aina l-masjidu?',id:'Di mana masjidnya?',cat:'pasar'},
+  {ar:'إِلَى اللِّقَاءِ',lat:'ilā l-liqāʾ',id:'Sampai jumpa',cat:'salam'},
+  {ar:'مَعَ السَّلَامَةِ',lat:'maʿa s-salāma',id:'Selamat jalan',cat:'salam'},
+];
+let currentPercCat='all';
+function filterPerc(cat,btn){
+  currentPercCat=cat;
+  document.querySelectorAll('.perc-cat-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderPerc();
+}
+function renderPerc(){
+  const filtered=currentPercCat==='all'?percData:percData.filter(p=>p.cat===currentPercCat);
+  document.getElementById('percGrid').innerHTML=filtered.map(p=>`
+    <div class="percakapan-card" onclick="speak('${p.ar.replace(/'/g,"\\'")}')">
+      <div class="arab">${p.ar}</div>
+      <div class="latin">${p.lat}</div>
+      <div class="indo">${p.id}</div>
+      <div style="font-size:0.7rem;color:var(--text2);margin-top:4px">🔊 Klik untuk dengar</div>
+    </div>
+  `).join('');
+}
+
+// ===== HURUF =====
+const huruf=[
+  {ar:'ا',name:'Alif',lat:'a/ā'},{ar:'ب',name:'Ba',lat:'b'},{ar:'ت',name:'Ta',lat:'t'},
+  {ar:'ث',name:'Tsa',lat:'ts'},{ar:'ج',name:'Jim',lat:'j'},{ar:'ح',name:'Ha',lat:'ḥ'},
+  {ar:'خ',name:'Kha',lat:'kh'},{ar:'د',name:'Dal',lat:'d'},{ar:'ذ',name:'Dzal',lat:'dz'},
+  {ar:'ر',name:'Ra',lat:'r'},{ar:'ز',name:'Zain',lat:'z'},{ar:'س',name:'Sin',lat:'s'},
+  {ar:'ش',name:'Syin',lat:'sy'},{ar:'ص',name:'Shad',lat:'ṣ'},{ar:'ض',name:'Dhad',lat:'ḍ'},
+  {ar:'ط',name:'Tha',lat:'ṭ'},{ar:'ظ',name:'Zha',lat:'ẓ'},{ar:'ع',name:'Ain',lat:'ʿ'},
+  {ar:'غ',name:'Ghain',lat:'gh'},{ar:'ف',name:'Fa',lat:'f'},{ar:'ق',name:'Qaf',lat:'q'},
+  {ar:'ك',name:'Kaf',lat:'k'},{ar:'ل',name:'Lam',lat:'l'},{ar:'م',name:'Mim',lat:'m'},
+  {ar:'ن',name:'Nun',lat:'n'},{ar:'ه',name:'Ha',lat:'h'},{ar:'و',name:'Waw',lat:'w/ū'},
+  {ar:'ي',name:'Ya',lat:'y/ī'},
+];
+let selectedHuruf=huruf[0];
+let canvas,ctx,drawing=false,lastX=0,lastY=0,penColor='#f5a623',penSize=6;
+
+function renderHuruf(){
+  document.getElementById('hurufGrid').innerHTML=huruf.map((h,i)=>`
+    <div class="huruf-card ${i===0?'active':''}" onclick="selectHuruf(${i},this)">
+      <div class="huruf-ar">${h.ar}</div>
+      <div class="huruf-name">${h.name}</div>
+      <div class="huruf-latin">(${h.lat})</div>
+    </div>
+  `).join('');
+}
+function selectHuruf(i,el){
+  selectedHuruf=huruf[i];
+  document.querySelectorAll('.huruf-card').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('canvasTitle').textContent=selectedHuruf.ar+' — '+selectedHuruf.name;
+  clearCanvas();
+}
+function initCanvas(){
+  canvas=document.getElementById('drawCanvas');
+  ctx=canvas.getContext('2d');
+  ctx.lineCap='round';ctx.lineJoin='round';
+  updatePen();
+  canvas.addEventListener('mousedown',startDraw);
+  canvas.addEventListener('mousemove',draw);
+  canvas.addEventListener('mouseup',()=>drawing=false);
+  canvas.addEventListener('mouseleave',()=>drawing=false);
+  canvas.addEventListener('touchstart',e=>{e.preventDefault();const t=e.touches[0];const r=canvas.getBoundingClientRect();lastX=t.clientX-r.left;lastY=t.clientY-r.top;drawing=true;},{passive:false});
+  canvas.addEventListener('touchmove',e=>{e.preventDefault();if(!drawing)return;const t=e.touches[0];const r=canvas.getBoundingClientRect();const x=t.clientX-r.left,y=t.clientY-r.top;ctx.beginPath();ctx.moveTo(lastX,lastY);ctx.lineTo(x,y);ctx.stroke();lastX=x;lastY=y;},{passive:false});
+  canvas.addEventListener('touchend',()=>drawing=false);
+}
+function startDraw(e){drawing=true;const r=canvas.getBoundingClientRect();lastX=e.clientX-r.left;lastY=e.clientY-r.top;}
+function draw(e){if(!drawing)return;const r=canvas.getBoundingClientRect();const x=e.clientX-r.left,y=e.clientY-r.top;ctx.beginPath();ctx.moveTo(lastX,lastY);ctx.lineTo(x,y);ctx.stroke();lastX=x;lastY=y;}
+function clearCanvas(){if(ctx){ctx.clearRect(0,0,canvas.width,canvas.height);}}
+function updatePen(){penColor=document.getElementById('penColor').value;penSize=parseInt(document.getElementById('penSize').value);if(ctx){ctx.strokeStyle=penColor;ctx.lineWidth=penSize;}}
+function showGuide(){
+  if(!ctx)return;
+  ctx.save();ctx.globalAlpha=0.15;ctx.font='160px Amiri, serif';ctx.fillStyle='#f5a623';
+  ctx.textAlign='center';ctx.fillText(selectedHuruf.ar,canvas.width/2,canvas.height*0.75);
+  ctx.restore();
+}
+
+// ===== FLASHCARD =====
+let fcIndex=0,fcFlipped=false,fcHafal=[],fcList=[...vocab];
+function renderFC(){
+  const v=fcList[fcIndex];
+  document.getElementById('fc-arabic').textContent=v.ar;
+  document.getElementById('fc-latin').textContent=v.lat;
+  document.getElementById('fc-meaning').textContent=v.id;
+  document.getElementById('fc-example').textContent=v.ex||'';
+  document.getElementById('fc-counter').textContent=(fcIndex+1)+' / '+fcList.length;
+  document.getElementById('fc-badge').textContent=(fcIndex+1)+'/'+fcList.length;
+  document.getElementById('fc-hafal').textContent=fcHafal.length;
+  document.getElementById('fc-sisa').textContent=fcList.length-fcHafal.length;
+  document.getElementById('fc-prog').style.width=((fcIndex+1)/fcList.length*100)+'%';
+  document.getElementById('mainFlashcard').classList.remove('flipped');
+  fcFlipped=false;
+}
+function flipCard(){document.getElementById('mainFlashcard').classList.toggle('flipped');fcFlipped=!fcFlipped;}
+function fcNav(d){fcIndex=Math.max(0,Math.min(fcList.length-1,fcIndex+d));renderFC();}
+function fcMark(h){if(h&&!fcHafal.includes(fcIndex))fcHafal.push(fcIndex);else if(!h)fcHafal=fcHafal.filter(i=>i!==fcIndex);renderFC();fcNav(1);}
+function fcShuffle(){fcList=shuffle([...vocab]);fcIndex=0;renderFC();}
+function fcReset(){fcList=[...vocab];fcIndex=0;fcHafal=[];renderFC();}
+function fcHafal2(){const belum=vocab.filter((_,i)=>!fcHafal.includes(i));fcList=belum;fcIndex=0;renderFC();}
+
+// ===== SPEAK =====
+function speak(text){
+  if(!window.speechSynthesis)return;
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='ar-SA';u.rate=0.8;
+  speechSynthesis.cancel();speechSynthesis.speak(u);
+}
+
+// ===== ANGKA INIT =====
+function initAngka(){displayAngka(angkaData[1]);renderAngkaGrid(angkaData.slice(1,11));}
+
+// ===== GAMES =====
+let gameVocab=shuffle([...vocab]);let gameIdx=0;
+let tbBenar=0,tbSalah=0,tbAnswered=false;
+let skBenar=0,skAnswer=[],skTarget=[],skIdx=0;
+let mmFlipped=[],mmMatched=0,mmPairs=0,mmLocked=false,mmAttempts=0;
+let klTimer=null,klBenar=0,klIdx=0,klAnswered=false;
+let agBenar=0,agIdx=0,agAnswered=false;
+
+function startGame(type){
+  document.getElementById('gamesGrid').style.display='none';
+  document.querySelectorAll('.game-area').forEach(g=>g.classList.remove('active'));
+  gameVocab=shuffle([...vocab]);
+  if(type==='tebak'){tbBenar=0;tbSalah=0;tbAnswered=false;gameIdx=0;updateTbScore();nextTebak();}
+  if(type==='susun'){skBenar=0;skIdx=0;nextSusun();}
+  if(type==='memory'){initMemory();}
+  if(type==='kilat'){klBenar=0;klIdx=0;startKilat();}
+  if(type==='angkagame'){agBenar=0;agIdx=0;nextAngkaGame();}
+  document.getElementById('game-'+type).classList.add('active');
+}
+function closeGame(){
+  document.querySelectorAll('.game-area').forEach(g=>g.classList.remove('active'));
+  document.getElementById('gamesGrid').style.display='grid';
+  if(klTimer)clearInterval(klTimer);
+}
+
+// TEBAK ARTI
+function updateTbScore(){
+  document.getElementById('tb-benar').textContent=tbBenar;
+  document.getElementById('tb-salah').textContent=tbSalah;
+  document.getElementById('tb-no').textContent=gameIdx+1;
+}
+function nextTebak(){
+  tbAnswered=false;
+  document.getElementById('tb-feedback').classList.remove('show','benar','salah');
+  document.getElementById('tb-next').classList.remove('show');
+  if(gameIdx>=gameVocab.length)gameIdx=0;
+  const v=gameVocab[gameIdx];
+  document.getElementById('tb-word').textContent=v.ar;
+  document.getElementById('tb-lat').textContent=v.lat;
+  const wrong=shuffle(vocab.filter(x=>x.id!==v.id)).slice(0,3);
+  const opts=shuffle([v,...wrong]);
+  document.getElementById('tb-opts').innerHTML=opts.map(o=>`
+    <button class="game-option" onclick="checkTebak('${o.id.replace(/'/g,"\\'")}','${v.id.replace(/'/g,"\\'")}',this)">${o.id}</button>
+  `).join('');
+  gameIdx++;updateTbScore();
+}
+function checkTebak(ans,correct,el){
+  if(tbAnswered)return;tbAnswered=true;
+  const allBtns=document.querySelectorAll('#tb-opts .game-option');
+  allBtns.forEach(b=>{if(b.textContent.trim()===correct)b.classList.add('correct');});
+  const fb=document.getElementById('tb-feedback');
+  if(ans===correct){el.classList.add('correct');tbBenar++;fb.textContent='✅ Benar! '+correct;fb.className='quiz-feedback show benar';}
+  else{el.classList.add('wrong');tbSalah++;fb.textContent='❌ Salah! Jawaban: '+correct;fb.className='quiz-feedback show salah';}
+  document.getElementById('tb-next').classList.add('show');
+  updateTbScore();
+}
+
+// SUSUN KATA
+function nextSusun(){
+  document.getElementById('sk-feedback').classList.remove('show','benar','salah');
+  skAnswer=[];
+  if(skIdx>=gameVocab.length)skIdx=0;
+  const v=gameVocab[skIdx];
+  skTarget=v.ar.split('');
+  document.getElementById('sk-meaning').textContent=v.id;
+  document.getElementById('sk-hint').textContent='('+v.lat+')';
+  document.getElementById('sk-soal').textContent=skIdx+1;
+  skIdx++;
+  const shuffled=shuffle([...skTarget]);
+  renderSkTiles(shuffled);
+  renderSkAnswer();
+}
+function renderSkTiles(tiles){
+  document.getElementById('sk-tiles').innerHTML=tiles.map((t,i)=>`
+    <div class="kata-tile ${skAnswer.includes(i)?'selected':''}" onclick="skPick(${i},'${t}')">${t}</div>
+  `).join('');
+}
+function renderSkAnswer(){
+  const el=document.getElementById('sk-answer');
+  if(skAnswer.length===0){el.innerHTML='<span style="color:var(--text2);font-size:0.85rem">Klik huruf di bawah</span>';return;}
+  el.innerHTML=skAnswer.map((pair,i)=>`<span class="kata-answer-tile" onclick="skRemove(${i})">${pair.char}</span>`).join('');
+}
+function skPick(i,char){
+  if(skAnswer.find(a=>a.idx===i))return;
+  skAnswer.push({idx:i,char});
+  renderSkAnswer();
+  // re-render tiles
+  const tiles=document.getElementById('sk-tiles').querySelectorAll('.kata-tile');
+  tiles[i].classList.add('selected');
+}
+function skRemove(ansIdx){
+  const removed=skAnswer[ansIdx];
+  skAnswer.splice(ansIdx,1);
+  renderSkAnswer();
+  const tiles=document.getElementById('sk-tiles').querySelectorAll('.kata-tile');
+  if(tiles[removed.idx])tiles[removed.idx].classList.remove('selected');
+}
+function skClear(){skAnswer=[];renderSkAnswer();document.querySelectorAll('.kata-tile').forEach(t=>t.classList.remove('selected'));}
+function skCheck(){
+  const ans=skAnswer.map(a=>a.char).join('');
+  const target=skTarget.join('');
+  const fb=document.getElementById('sk-feedback');
+  if(ans===target){
+    skBenar++;document.getElementById('sk-benar').textContent=skBenar;
+    fb.textContent='✅ Benar! '+target;fb.className='quiz-feedback show benar';
+    confetti();setTimeout(nextSusun,1500);
+  }else{
+    fb.textContent='❌ Belum tepat! Coba lagi atau skip.';fb.className='quiz-feedback show salah';
+  }
+}
+
+// MEMORY MATCH
+function initMemory(){
+  mmFlipped=[];mmMatched=0;mmPairs=0;mmAttempts=0;mmLocked=false;
+  document.getElementById('mm-pasang').textContent=0;
+  document.getElementById('mm-percobaan').textContent=0;
+  const pairs=shuffle([...vocab]).slice(0,6);
+  mmPairs=pairs.length;
+  const cards=[];
+  pairs.forEach((v,i)=>{
+    cards.push({id:i,type:'ar',text:v.ar,pair:i});
+    cards.push({id:i+100,type:'id',text:v.id,pair:i});
+  });
+  const shuffled=shuffle(cards);
+  const grid=document.getElementById('memoryGrid');
+  grid.innerHTML=shuffled.map((c,idx)=>`
+    <div class="memory-card" id="mc-${idx}" data-pair="${c.pair}" data-type="${c.type}" onclick="flipMemory(${idx})">
+      <div class="memory-card-inner memory-card-front"><span class="q-mark">?</span></div>
+      <div class="memory-card-inner memory-card-back">${c.type==='ar'?`<span style="font-family:Amiri,serif;direction:rtl;font-size:1.2rem">${c.text}</span>`:c.text}</div>
+    </div>
+  `).join('');
+}
+function flipMemory(idx){
+  if(mmLocked)return;
+  const card=document.getElementById('mc-'+idx);
+  if(card.classList.contains('flipped')||card.classList.contains('matched'))return;
+  card.classList.add('flipped');
+  mmFlipped.push(idx);
+  if(mmFlipped.length===2){
+    mmLocked=true;mmAttempts++;
+    document.getElementById('mm-percobaan').textContent=mmAttempts;
+    const [a,b]=mmFlipped.map(i=>document.getElementById('mc-'+i));
+    if(a.dataset.pair===b.dataset.pair&&a.dataset.type!==b.dataset.type){
+      mmMatched++;document.getElementById('mm-pasang').textContent=mmMatched;
+      a.classList.add('matched');b.classList.add('matched');
+      mmFlipped=[];mmLocked=false;
+      if(mmMatched===mmPairs){setTimeout(()=>{confetti();alert('🎉 Semua pasangan ditemukan!');},300);}
+    }else{
+      setTimeout(()=>{a.classList.remove('flipped');b.classList.remove('flipped');mmFlipped=[];mmLocked=false;},900);
+    }
+  }
+}
+
+// KILAT
+function startKilat(){
+  klBenar=0;klIdx=0;klAnswered=false;
+  document.getElementById('kl-benar').textContent=0;
+  nextKilat();
+}
+function nextKilat(){
+  klAnswered=false;
+  document.getElementById('kl-feedback').classList.remove('show','benar','salah');
+  if(klIdx>=10){clearInterval(klTimer);document.getElementById('kl-word').textContent='🏁';document.getElementById('kl-lat').textContent='Selesai! Skor: '+klBenar+'/10';document.getElementById('kl-opts').innerHTML='<button class="btn-primary" onclick="startKilat()" style="grid-column:1/-1;padding:14px">🔄 Main Lagi</button>';return;}
+  const v=gameVocab[klIdx%gameVocab.length];
+  document.getElementById('kl-word').textContent=v.ar;
+  document.getElementById('kl-lat').textContent=v.lat;
+  document.getElementById('kl-no').textContent=klIdx+1;
+  const wrong=shuffle(vocab.filter(x=>x.id!==v.id)).slice(0,3);
+  const opts=shuffle([v,...wrong]);
+  document.getElementById('kl-opts').innerHTML=opts.map(o=>`
+    <button class="game-option" onclick="checkKilat('${o.id.replace(/'/g,"\\'")}','${v.id.replace(/'/g,"\\'")}',this)">${o.id}</button>
+  `).join('');
+  startTimer();klIdx++;
+}
+let klTimerVal=10;
+function startTimer(){
+  if(klTimer)clearInterval(klTimer);klTimerVal=10;
+  document.getElementById('kl-timer').textContent=klTimerVal;
+  klTimer=setInterval(()=>{
+    klTimerVal--;document.getElementById('kl-timer').textContent=klTimerVal;
+    if(klTimerVal<=0){clearInterval(klTimer);if(!klAnswered){klAnswered=true;nextKilat();}}
+  },1000);
+}
+function checkKilat(ans,correct,el){
+  if(klAnswered)return;klAnswered=true;clearInterval(klTimer);
+  const allBtns=document.querySelectorAll('#kl-opts .game-option');
+  allBtns.forEach(b=>{if(b.textContent.trim()===correct)b.classList.add('correct');});
+  const fb=document.getElementById('kl-feedback');
+  if(ans===correct){el.classList.add('correct');klBenar++;fb.textContent='✅ Benar!';fb.className='quiz-feedback show benar';}
+  else{el.classList.add('wrong');fb.textContent='❌ Jawaban: '+correct;fb.className='quiz-feedback show salah';}
+  document.getElementById('kl-benar').textContent=klBenar;
+  setTimeout(nextKilat,1000);
+}
+
+// ANGKA GAME
+const angkaGamePool=angkaData.filter(a=>a.n>=1&&a.n<=20);
+function nextAngkaGame(){
+  agAnswered=false;
+  document.getElementById('ag-feedback').classList.remove('show','benar','salah');
+  document.getElementById('ag-next').classList.remove('show');
+  const v=shuffle([...angkaGamePool])[0];
+  document.getElementById('ag-ar').textContent=toArabicDigit(v.n);
+  document.getElementById('ag-no').textContent=agIdx+1;agIdx++;
+  const wrong=shuffle(angkaGamePool.filter(a=>a.n!==v.n)).slice(0,3);
+  const opts=shuffle([v,...wrong]);
+  document.getElementById('ag-opts').innerHTML=opts.map(o=>`
+    <button class="game-option" onclick="checkAngkaGame(${o.n},${v.n},this)">${o.n}</button>
+  `).join('');
+}
+function checkAngkaGame(ans,correct,el){
+  if(agAnswered)return;agAnswered=true;
+  const allBtns=document.querySelectorAll('#ag-opts .game-option');
+  allBtns.forEach(b=>{if(parseInt(b.textContent)===correct)b.classList.add('correct');});
+  const fb=document.getElementById('ag-feedback');
+  if(ans===correct){el.classList.add('correct');agBenar++;fb.textContent='✅ Benar! '+correct;fb.className='quiz-feedback show benar';confetti();}
+  else{el.classList.add('wrong');fb.textContent='❌ Jawaban: '+correct;fb.className='quiz-feedback show salah';}
+  document.getElementById('ag-benar').textContent=agBenar;
+  document.getElementById('ag-next').classList.add('show');
+}
+
+// ===== KAMUS AI =====
+async function kamusSearch(){
+  const q=document.getElementById('kamusInput').value.trim();
+  if(!q)return;
+  const res=document.getElementById('kamusResult');
+  const loading=document.getElementById('kamusLoading');
+  const content=document.getElementById('kamusContent');
+  res.classList.add('show');
+  loading.style.display='block';
+  content.innerHTML='';
+  try{
+    const response=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system:`Kamu adalah kamus Bahasa Arab yang ahli. Jawab pertanyaan tentang kosakata Arab, tata bahasa, atau terjemahan dalam format HTML sederhana (gunakan <div>, <span>, <p> saja). Jangan gunakan markdown. Sertakan: tulisan Arab (dalam tag dengan dir=rtl dan font Amiri), transliterasi latin, arti dalam bahasa Indonesia, dan contoh kalimat jika relevan. Jawab ringkas tapi lengkap. Jika ditanya grammar, jelaskan dengan singkat dan jelas.`,
+        messages:[{role:'user',content:q}]
+      })
+    });
+    const data=await response.json();
+    loading.style.display='none';
+    const text=data.content?.map(c=>c.text||'').join('')||'Tidak ada jawaban.';
+    content.innerHTML=`<div style="line-height:1.7">${text}</div>`;
+  }catch(e){
+    loading.style.display='none';
+    content.innerHTML=`<div style="color:var(--red)">Gagal menghubungi AI. Pastikan koneksi internet aktif.</div>`;
+  }
+}
+function kamusAuto(q){document.getElementById('kamusInput').value=q;kamusSearch();}
+
+// ===== KUIS =====
+let quizType='arab-indo',quizCount=20,quizCurrent=0,quizBenar=0,quizSalah=0;
+let quizQuestions=[],quizAnswered=false;
+
+function setQuizType(t,btn){
+  quizType=t;
+  document.querySelectorAll('.quiz-type-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+function startQuiz(){
+  quizCount=parseInt(document.getElementById('quizCount').value)||20;
+  quizBenar=0;quizSalah=0;quizCurrent=0;quizAnswered=false;
+  quizQuestions=shuffle([...vocab]).slice(0,quizCount);
+  document.getElementById('quiz-setup').style.display='none';
+  document.getElementById('quiz-result').classList.remove('show');
+  document.getElementById('quiz-game').style.display='block';
+  renderQuizQ();
+}
+function renderQuizQ(){
+  quizAnswered=false;
+  document.getElementById('quiz-feedback').classList.remove('show','benar','salah');
+  document.getElementById('quiz-next-btn').classList.remove('show');
+  const v=quizQuestions[quizCurrent];
+  const pct=((quizCurrent)/quizCount*100);
+  document.getElementById('quiz-prog-fill').style.width=pct+'%';
+  document.getElementById('quiz-prog-text').textContent=(quizCurrent+1)+'/'+quizCount;
+  document.getElementById('q-benar').textContent=quizBenar;
+  document.getElementById('q-salah').textContent=quizSalah;
+  document.getElementById('q-sisa').textContent=quizCount-quizCurrent;
+  
+  let type=quizType;
+  if(type==='campuran')type=Math.random()<0.5?'arab-indo':'indo-arab';
+  
+  if(type==='arab-indo'){
+    document.getElementById('quiz-type-tag').textContent='Arab → Indonesia';
+    document.getElementById('quiz-q').textContent=v.ar;
+    document.getElementById('quiz-q-text').textContent='('+v.lat+')';
+    const wrong=shuffle(vocab.filter(x=>x.id!==v.id)).slice(0,3);
+    const opts=shuffle([v,...wrong]);
+    document.getElementById('quiz-choices').innerHTML=opts.map(o=>`
+      <button class="quiz-choice" onclick="checkQuiz('${o.id.replace(/'/g,"\\'")}','${v.id.replace(/'/g,"\\'")}',this)">${o.id}</button>
+    `).join('');
+  }else{
+    document.getElementById('quiz-type-tag').textContent='Indonesia → Arab';
+    document.getElementById('quiz-q').style.fontFamily='inherit';
+    document.getElementById('quiz-q').style.direction='ltr';
+    document.getElementById('quiz-q').style.fontSize='1.5rem';
+    document.getElementById('quiz-q').textContent=v.id;
+    document.getElementById('quiz-q-text').textContent='';
+    const wrong=shuffle(vocab.filter(x=>x.ar!==v.ar)).slice(0,3);
+    const opts=shuffle([v,...wrong]);
+    document.getElementById('quiz-choices').innerHTML=opts.map(o=>`
+      <button class="quiz-choice" onclick="checkQuiz('${o.ar.replace(/'/g,"\\'")}','${v.ar.replace(/'/g,"\\'")}',this)" style="font-family:Amiri,serif;font-size:1.3rem;direction:rtl">${o.ar}</button>
+    `).join('');
+  }
+}
+function checkQuiz(ans,correct,el){
+  if(quizAnswered)return;quizAnswered=true;
+  const allBtns=document.querySelectorAll('.quiz-choice');
+  allBtns.forEach(b=>{if(b.textContent.trim()===correct)b.classList.add('correct');});
+  const fb=document.getElementById('quiz-feedback');
+  if(ans===correct){el.classList.add('correct');quizBenar++;fb.textContent='✅ Benar!';fb.className='quiz-feedback show benar';if(quizBenar%5===0)confetti();}
+  else{el.classList.add('wrong');quizSalah++;fb.textContent='❌ Jawaban benar: '+correct;fb.className='quiz-feedback show salah';}
+  document.getElementById('q-benar').textContent=quizBenar;
+  document.getElementById('q-salah').textContent=quizSalah;
+  document.getElementById('quiz-next-btn').classList.add('show');
+}
+function quizNext(){
+  quizCurrent++;
+  if(quizCurrent>=quizCount){showQuizResult();return;}
+  renderQuizQ();
+}
+function showQuizResult(){
+  document.getElementById('quiz-game').style.display='none';
+  const r=document.getElementById('quiz-result');r.classList.add('show');
+  const pct=Math.round(quizBenar/quizCount*100);
+  document.getElementById('result-score').textContent=quizBenar+'/'+quizCount+' ('+pct+'%)';
+  let emoji='😅',grade='Terus Belajar!',msg='Jangan menyerah! Coba lagi ya!';
+  if(pct>=90){emoji='🏆';grade='Luar Biasa!';msg='Kamu hampir sempurna! Masya Allah!';}
+  else if(pct>=70){emoji='🌟';grade='Bagus!';msg='Hasilnya bagus! Terus semangat belajar!';}
+  else if(pct>=50){emoji='👍';grade='Lumayan!';msg='Separuh benar! Kamu bisa lebih baik lagi.';}
+  document.getElementById('result-emoji').textContent=emoji;
+  document.getElementById('result-grade').textContent=grade;
+  document.getElementById('result-msg').textContent=msg;
+  if(pct>=70)confetti();
+}
+
+// ===== CONFETTI =====
+function confetti(){
+  const div=document.createElement('div');div.className='confetti-burst';document.body.appendChild(div);
+  const colors=['#f5a623','#e8630a','#2ecc71','#4facfe','#a78bfa','#e74c3c'];
+  for(let i=0;i<30;i++){
+    const p=document.createElement('div');p.className='confetti-piece';
+    p.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*50}%;background:${colors[Math.floor(Math.random()*colors.length)]};width:${6+Math.random()*8}px;height:${6+Math.random()*8}px;animation-delay:${Math.random()*0.5}s;animation-duration:${1.5+Math.random()}s`;
+    div.appendChild(p);
+  }
+  setTimeout(()=>div.remove(),3000);
+}
+
+// ===== UTILS =====
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+
+// ===== NAV =====
+function showPanel(name){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+  document.querySelector(`[data-panel="${name}"]`)?.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ===== INIT =====
+window.addEventListener('DOMContentLoaded',()=>{
+  renderFC();
+  initAngka();
+  renderPerc();
+  renderHuruf();
+  setTimeout(initCanvas,100);
+  document.getElementById('angkaGrid').innerHTML='';
+  renderAngkaGrid(angkaData.slice(1,11));
+});
+</script>
+</body>
+</html>
