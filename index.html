@@ -212,7 +212,6 @@ canvas{display:block;touch-action:none;cursor:crosshair;}
     <button class="nav-btn" onclick="showSection('percakapan')">💬 Percakapan</button>
     <button class="nav-btn" onclick="showSection('huruf')">✍️ Huruf</button>
     <button class="nav-btn" onclick="showSection('games')">🎮 Games</button>
-    <button class="nav-btn" onclick="showSection('kamus')">🔍 Kamus AI</button>
     <button class="nav-btn" onclick="showSection('kuis')">🎯 Kuis</button>
   </div>
 </nav>
@@ -233,16 +232,15 @@ canvas{display:block;touch-action:none;cursor:crosshair;}
     <div class="stat-card"><div class="stat-num">120+</div><div class="stat-label">Kosakata</div></div>
     <div class="stat-card"><div class="stat-num">1000+</div><div class="stat-label">Angka Arab</div></div>
     <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Games Seru</div></div>
-    <div class="stat-card"><div class="stat-num">∞</div><div class="stat-label">Kamus AI</div></div>
+    <div class="stat-card"><div class="stat-num">36</div><div class="stat-label">Percakapan</div></div>
   </div>
   <h2 class="section-title">🚀 <span>Mulai Belajar dari Sini</span></h2>
   <div class="feature-grid">
-    <div class="feature-card" onclick="showSection('flashcard')"><div class="feature-icon">📚</div><div class="feature-title">Flashcard Interaktif</div><div class="feature-desc">120+ kosakata sehari-hari, per kategori</div></div>
+    <div class="feature-card" onclick="showSection('flashcard')"><div class="feature-icon">📚</div><div class="feature-title">Flashcard Interaktif</div><div class="feature-desc">120+ kosakata sehari-hari, 7 kategori</div></div>
     <div class="feature-card" onclick="showSection('angka')"><div class="feature-icon">🔢</div><div class="feature-title">Angka 1 – 1000+</div><div class="feature-desc">Pelajari angka Arab lengkap</div></div>
     <div class="feature-card" onclick="showSection('percakapan')"><div class="feature-icon">💬</div><div class="feature-title">Percakapan</div><div class="feature-desc">Salam, do'a, dan kalimat sehari-hari</div></div>
     <div class="feature-card" onclick="showSection('huruf')"><div class="feature-icon">✍️</div><div class="feature-title">Latihan Huruf</div><div class="feature-desc">28 huruf hijaiyah, latihan langsung</div></div>
-    <div class="feature-card" onclick="showSection('games')"><div class="feature-icon">🎮</div><div class="feature-title">5 Games Seru</div><div class="feature-desc">Tebak, susun kata, memory, dan lainnya!</div></div>
-    <div class="feature-card" onclick="showSection('kamus')"><div class="feature-icon">🤖</div><div class="feature-title">Kamus AI</div><div class="feature-desc">Tanya apa aja! Dijawab AI secara lengkap</div></div>
+    <div class="feature-card" onclick="showSection('games')"><div class="feature-icon">🎮</div><div class="feature-title">5 Games Seru</div><div class="feature-desc">Tebak, susun kata, memory, dan lainnya!</div></div><div class="feature-title">Kamus AI</div><div class="feature-desc">Tanya apa aja! Dijawab AI secara lengkap</div></div>
   </div>
 </div>
 
@@ -467,36 +465,6 @@ canvas{display:block;touch-action:none;cursor:crosshair;}
     <div class="angka-display"><div class="angka-arabic" id="ang-display"></div></div>
     <div class="answers-grid" id="ang-choices"></div>
     <div style="text-align:center;margin-top:14px"><button class="btn btn-primary" onclick="nextAngkaGame()">Soal Berikutnya →</button></div>
-  </div>
-</div>
-
-<!-- KAMUS AI -->
-<div id="sec-kamus" class="section">
-  <h2 class="section-title">🤖 <span>Kamus AI — Tanya Apa Aja!</span></h2>
-  <div class="kamus-wrap">
-    <div class="card" style="margin-bottom:18px">
-      <p style="color:#777;font-size:0.88rem;line-height:1.65">
-        💡 Contoh pertanyaan: <em>"apa arti مَدْرَسَة?"</em> · <em>"cara menulis 'terima kasih' dalam Arab?"</em> · <em>"apa beda أنت dan أنتِ?"</em> · <em>"bagaimana doa sebelum makan?"</em>
-      </p>
-    </div>
-    <div class="kamus-input-wrap">
-      <input class="kamus-input" id="kamus-input" type="text" placeholder="Ketik pertanyaan kamu..." onkeydown="if(event.key==='Enter')searchKamus()"/>
-      <button class="btn btn-primary" onclick="searchKamus()">🔍 Cari</button>
-    </div>
-    <div class="kamus-chips">
-      <span class="kamus-chip" onclick="setKamusQuery('apa arti مَدْرَسَة?')">مَدْرَسَة</span>
-      <span class="kamus-chip" onclick="setKamusQuery('bagaimana cara menulis terima kasih dalam Arab?')">Terima kasih</span>
-      <span class="kamus-chip" onclick="setKamusQuery('apa beda أنت dan أنتِ?')">أنت vs أنتِ</span>
-      <span class="kamus-chip" onclick="setKamusQuery('bagaimana doa sebelum makan dalam bahasa Arab?')">Doa makan</span>
-      <span class="kamus-chip" onclick="setKamusQuery('bagaimana menulis angka 100 dalam Arab?')">Angka 100</span>
-      <span class="kamus-chip" onclick="setKamusQuery('apa arti dan penggunaan kata بَيْت?')">بَيْت</span>
-      <span class="kamus-chip" onclick="setKamusQuery('apa itu huruf hijaiyah?')">Hijaiyah</span>
-      <span class="kamus-chip" onclick="setKamusQuery('bagaimana cara membaca harakat fathah, kasrah, dhammah?')">Harakat</span>
-    </div>
-    <div class="kamus-result" id="kamus-result">
-      <div class="kamus-loading" id="kamus-loading"><span>AI sedang menjawab</span><span class="dots"></span></div>
-      <div class="kamus-answer" id="kamus-answer"></div>
-    </div>
   </div>
 </div>
 
@@ -1246,68 +1214,7 @@ function checkAngka(btn,chosen,correct){
   angkaScore.soal++;
 }
 
-// =====================================================================
-// KAMUS AI
-// =====================================================================
-function setKamusQuery(q){document.getElementById('kamus-input').value=q;searchKamus();}
-async function searchKamus(){
-  var q = document.getElementById('kamus-input').value.trim();
-  if(!q) return;
-  var res     = document.getElementById('kamus-result');
-  var loading = document.getElementById('kamus-loading');
-  var answer  = document.getElementById('kamus-answer');
-  res.classList.add('show');
-  loading.style.display = 'block';
-  answer.textContent = '';
 
-  var systemPrompt = 'Kamu adalah guru bahasa Arab yang ramah dan menyenangkan untuk anak-anak Indonesia. Jawab dengan bahasa Indonesia yang mudah dipahami. Gunakan emoji yang sesuai. Jika ada kata Arab tulis huruf Arabnya dan transliterasi Latinnya. Berikan contoh penggunaan jika relevan. Jawaban singkat dan jelas.';
-  var fullPrompt = systemPrompt + ' Pertanyaan: ' + q;
-
-  try{
-    // Pollinations AI - gratis, tanpa API key, CORS OK
-    var encoded = encodeURIComponent(fullPrompt);
-    var url = 'https://text.pollinations.ai/' + encoded + '?model=openai&seed=42';
-    
-    var response = await fetch(url, {
-      method: 'GET',
-      headers: {'Accept': 'text/plain'}
-    });
-    
-    loading.style.display = 'none';
-    
-    if(response.ok){
-      var text = await response.text();
-      if(text && text.trim()){
-        answer.textContent = text.trim();
-      } else {
-        answer.textContent = '❌ Jawaban kosong. Coba tanya lagi.';
-      }
-    } else {
-      // Fallback: coba endpoint POST
-      var res2 = await fetch('https://text.pollinations.ai/', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-          messages:[
-            {role:'system', content: systemPrompt},
-            {role:'user', content: q}
-          ],
-          model: 'openai',
-          seed: 42
-        })
-      });
-      if(res2.ok){
-        var txt2 = await res2.text();
-        answer.textContent = txt2.trim() || '❌ Tidak ada jawaban.';
-      } else {
-        answer.textContent = '❌ Kamus AI sedang tidak tersedia. Coba beberapa saat lagi.';
-      }
-    }
-  } catch(e){
-    loading.style.display = 'none';
-    answer.textContent = '❌ Gagal terhubung ke AI. Periksa koneksi internet kamu.';
-  }
-}
 
 // =====================================================================
 // KUIS
