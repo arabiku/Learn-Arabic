@@ -165,20 +165,6 @@ canvas{display:block;touch-action:none;cursor:crosshair;}
 /* Angka game */
 .angka-display{background:linear-gradient(135deg,#FFD93D,#FF8E53);color:#fff;border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:18px;box-shadow:0 8px 25px rgba(255,217,61,0.35);}
 .angka-arabic{font-size:4.5rem;font-weight:700;}
-/* KAMUS */
-.kamus-wrap{max-width:680px;margin:0 auto;}
-.kamus-input-wrap{display:flex;gap:9px;margin-bottom:18px;}
-.kamus-input{flex:1;padding:13px 18px;border-radius:50px;border:3px solid #eee;font-family:'Nunito',sans-serif;font-size:1rem;outline:none;transition:border-color 0.2s;}
-.kamus-input:focus{border-color:var(--blue);}
-.kamus-chips{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:18px;}
-.kamus-chip{background:#fff;border:2px solid #eee;border-radius:50px;padding:6px 13px;font-size:0.8rem;font-weight:700;cursor:pointer;transition:all 0.2s;}
-.kamus-chip:hover{background:var(--blue);color:#fff;border-color:var(--blue);}
-.kamus-result{background:var(--card);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow);min-height:90px;display:none;}
-.kamus-result.show{display:block;}
-.kamus-loading{text-align:center;padding:28px;font-size:0.95rem;color:#888;font-weight:700;}
-.kamus-loading .dots::after{content:'...';animation:kdots 1.2s infinite;}
-@keyframes kdots{0%{content:'.';}33%{content:'..';}66%{content:'...';}100%{content:'...';}}
-.kamus-answer{font-size:0.97rem;line-height:1.85;white-space:pre-wrap;}
 /* KUIS */
 .kuis-config{text-align:center;padding:16px 0;}
 .kuis-mode-btns{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-bottom:18px;}
@@ -221,7 +207,7 @@ canvas{display:block;touch-action:none;cursor:crosshair;}
   <div class="hero">
     <div class="hero-badge">✨ Belajar Arab Seru & Gratis!</div>
     <h1>Belajar Bahasa Arab<br/>dengan ArabiKu ✨</h1>
-    <p>Kosakata sehari-hari, angka 1–1000+, kamus AI tak terbatas, games seru, dan latihan menulis huruf!</p>
+    <p>Kosakata sehari-hari, angka 0–1000+, games seru, dan latihan menulis huruf hijaiyah!</p>
     <div class="hero-btns">
       <button class="btn btn-primary" onclick="showSection('flashcard')">📚 Mulai Flashcard</button>
       <button class="btn btn-secondary" onclick="showSection('games')">🎮 Main Games</button>
@@ -240,7 +226,7 @@ canvas{display:block;touch-action:none;cursor:crosshair;}
     <div class="feature-card" onclick="showSection('angka')"><div class="feature-icon">🔢</div><div class="feature-title">Angka 1 – 1000+</div><div class="feature-desc">Pelajari angka Arab lengkap</div></div>
     <div class="feature-card" onclick="showSection('percakapan')"><div class="feature-icon">💬</div><div class="feature-title">Percakapan</div><div class="feature-desc">Salam, do'a, dan kalimat sehari-hari</div></div>
     <div class="feature-card" onclick="showSection('huruf')"><div class="feature-icon">✍️</div><div class="feature-title">Latihan Huruf</div><div class="feature-desc">28 huruf hijaiyah, latihan langsung</div></div>
-    <div class="feature-card" onclick="showSection('games')"><div class="feature-icon">🎮</div><div class="feature-title">5 Games Seru</div><div class="feature-desc">Tebak, susun kata, memory, dan lainnya!</div></div><div class="feature-title">Kamus AI</div><div class="feature-desc">Tanya apa aja! Dijawab AI secara lengkap</div></div>
+    <div class="feature-card" onclick="showSection('games')"><div class="feature-icon">🎮</div><div class="feature-title">5 Games Seru</div><div class="feature-desc">Tebak, susun kata, memory, dan lainnya!</div></div>
   </div>
 </div>
 
@@ -726,7 +712,6 @@ function showSection(id){
     if(id==='percakapan'&&txt.includes('perc'))b.classList.add('active');
     if(id==='huruf'&&txt.includes('huru'))b.classList.add('active');
     if(id==='games'&&txt.includes('game'))b.classList.add('active');
-    if(id==='kamus'&&txt.includes('kamu'))b.classList.add('active');
     if(id==='kuis'&&txt.includes('kuis'))b.classList.add('active');
   });
   if(id==='flashcard') initFlashcard();
